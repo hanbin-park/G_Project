@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Graduate/lobbyScene/Scene/LobbyScene.unity
+    path: Assets/WorkHanbin/Hanbin/Graduate/lobbyScene/Scene/LobbyScene.unity
     guid: 0ede064e09f52ed4e90cc01648e639e2
   - enabled: 1
     path: Assets/WorkHanbin/Hanbin/InGameMap.unity
     guid: 92041b126b4b8734ba17d870746c34e9
   - enabled: 1
-    path: Assets/Graduate/EndScene/Scene/EndScene.unity
+    path: Assets/WorkHanbin/Hanbin/Graduate/EndScene/Scene/EndScene.unity
     guid: d27c16e1809efdd48afded7511003d37
   m_configObjects: {}
