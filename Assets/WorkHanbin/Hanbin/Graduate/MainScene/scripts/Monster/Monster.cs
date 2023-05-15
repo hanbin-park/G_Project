@@ -1,13 +1,14 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : MonoBehaviour, IDamageable
 {
 
-    private bool isDead = false;
 
-    AudioSource [] audios ;
+private bool isDead = false;
+
+AudioSource [] audios ;
 [SerializeField]
 private float waitTime=1;
 
@@ -50,7 +51,7 @@ private float waitTime=1;
 
 
 //change
-       GameObject targetplayer;
+    GameObject targetplayer;
        //
     Rigidbody rigid;
     BoxCollider boxCollider;
@@ -178,6 +179,24 @@ private float waitTime=1;
 
     private IEnumerator Die()
     {
+        GameObject liveL;
+        liveL = transform.GetChild(1).GetChild(0).GetChild(4).gameObject;
+        
+        GameObject liveR;
+        liveR = transform.GetChild(1).GetChild(0).GetChild(5).gameObject;        
+        GameObject deadL;
+        deadL = transform.GetChild(1).GetChild(0).GetChild(2).gameObject;
+        GameObject deadR;
+        deadR = transform.GetChild(1).GetChild(0).GetChild(3).gameObject;
+        
+        if(liveL != null && liveR != null && deadL != null &&  deadR != null)
+        {
+            liveL.SetActive(false);
+            liveR.SetActive(false);
+            deadL.SetActive(true);
+            deadR.SetActive(true);
+        }
+
         isDead = true;
 
         m_anim.SetTrigger("IsDead");
@@ -193,7 +212,7 @@ private float waitTime=1;
         }
 
         float startTime = Time.time;
-        while (Time.time < startTime + fadeTime)
+        /*while (Time.time < startTime + fadeTime)
         {
             float t = (Time.time - startTime) / fadeTime;
 
@@ -201,8 +220,10 @@ private float waitTime=1;
 
             c.a = Mathf.Lerp(1.0f, 0.0f, t);
             yield return null;
-        }
+        }*/
         
+        
+
         Destroy(gameObject);
     }
 
