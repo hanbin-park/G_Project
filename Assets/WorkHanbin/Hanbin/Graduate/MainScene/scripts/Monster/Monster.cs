@@ -179,25 +179,30 @@ private float waitTime=1;
 
     private IEnumerator Die()
     {
-        GameObject liveL;
-        liveL = transform.GetChild(1).GetChild(0).GetChild(4).gameObject;
-        
-        GameObject liveR;
-        liveR = transform.GetChild(1).GetChild(0).GetChild(5).gameObject;        
-        GameObject deadL;
-        deadL = transform.GetChild(1).GetChild(0).GetChild(2).gameObject;
-        GameObject deadR;
-        deadR = transform.GetChild(1).GetChild(0).GetChild(3).gameObject;
-        
-        if(liveL != null && liveR != null && deadL != null &&  deadR != null)
-        {
-            liveL.SetActive(false);
-            liveR.SetActive(false);
-            deadL.SetActive(true);
-            deadR.SetActive(true);
-        }
 
         isDead = true;
+
+        GameObject checkDragon;
+        checkDragon = transform.GetChild(0).gameObject;
+        if(checkDragon.name == "DeformationSystem")
+        {
+            GameObject liveL;
+            liveL = transform.GetChild(1).GetChild(0).GetChild(4).gameObject;
+            GameObject liveR;
+            liveR = transform.GetChild(1).GetChild(0).GetChild(5).gameObject;        
+            GameObject deadL;
+            deadL = transform.GetChild(1).GetChild(0).GetChild(2).gameObject;
+            GameObject deadR;
+            deadR = transform.GetChild(1).GetChild(0).GetChild(3).gameObject;
+            
+            if(liveL != null && liveR != null && deadL != null &&  deadR != null)
+            {
+                liveL.SetActive(false);
+                liveR.SetActive(false);
+                deadL.SetActive(true);
+                deadR.SetActive(true);
+            }
+        }
 
         m_anim.SetTrigger("IsDead");
 
@@ -222,8 +227,6 @@ private float waitTime=1;
             yield return null;
         }*/
         
-        
-
         Destroy(gameObject);
     }
 
@@ -282,7 +285,7 @@ IEnumerator changeState()
             
             monsterAttack.Play();
 
-            float ran=UnityEngine.Random.Range(-1,1);
+            float ran=UnityEngine.Random.Range(-10,-7);
             GameObject instance = Instantiate(bullet, bulletPos.position, Quaternion.identity);
             instance.GetComponent<Rigidbody>().velocity= new Vector3(0,1,ran).normalized*1;
         }
