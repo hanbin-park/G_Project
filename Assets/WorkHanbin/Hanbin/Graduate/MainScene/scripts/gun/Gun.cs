@@ -6,6 +6,9 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
 
+    // 장전해주세요 UI
+    public GameObject reloadUI;
+
     public Camera playerCamera;
 
     public GunUI gunUI;
@@ -115,6 +118,7 @@ public class Gun : MonoBehaviour
 
         currentAmmo--;
         timeSinceLastShot = 0;
+        
     }
 
 
@@ -149,6 +153,10 @@ public class Gun : MonoBehaviour
 
         currentAmmo--;
         timeSinceLastShot = 0;
+        if(currentAmmo == 0)
+        {
+            reloadUI.SetActive(true);
+        }
     }
 
 
@@ -201,6 +209,7 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        reloadUI.SetActive(false);
         reloadGun.Play();
         reloading = true;
 

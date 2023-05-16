@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     public GameObject[] HPImage;
 
+    public GameObject UserUi;
+
     [Header("player정보")]
 
 
@@ -124,6 +126,7 @@ public class Player : MonoBehaviour
                 HPImage[0].SetActive(true);
                 HPImage[1].SetActive(true);
                 HPImage[2].SetActive(true);
+                UserUi.SetActive(true);
 
                 timeline1.SetActive(true);
                 Destroy(nearOjbect);//집은 무기는 삭제

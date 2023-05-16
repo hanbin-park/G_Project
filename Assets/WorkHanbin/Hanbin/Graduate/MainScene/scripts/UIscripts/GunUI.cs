@@ -99,6 +99,7 @@ private void ChangeUI(Vector3 mousePos)
         {
             for (int i = 0; i < ammoUI.Length; i++)
             {
+
                 if (i < gunInfo.currentAmmo)
                     ammoUI[i].SetActive(true);
                 else
