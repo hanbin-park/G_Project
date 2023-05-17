@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
+  public GameObject reloadUi;
+
    public static Action shootInput;
    public static Action reloadInput;
 
@@ -16,7 +18,8 @@ public class PlayerShoot : MonoBehaviour
 
     if(Input.GetMouseButton(0))
     {
-        shootInput?.Invoke(); 
+        shootInput?.Invoke();
+        
     }
 
    if(mousePos.y >= 980)

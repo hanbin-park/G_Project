@@ -72,24 +72,34 @@ public class Gun : MonoBehaviour
         {
             if (currentAmmo > 0) //현재총알이 0보다 많으면
             {
-                if (CanShoot())//연사속도보다 시간지나고 재장전중이 아니면
+                if (currentAmmo > 0)
                 {
-
+                    if (CanShoot())//연사속도보다 시간지나고 재장전중이 아니면
+                    {
+                        
+                        
+                        shootSound.Play();
+                        muzzleFlashVFX.Play();
                     
-                    shootSound.Play();
-                    muzzleFlashVFX.Play();
-                   
-                    if(!IsMonsterInCrossHead)
-                    {
-                        rayshoot();
-                    }
-                    if(IsMonsterInCrossHead)
-                    {
-                       
-                       rayshoot( MonsterPos);
+                        if(!IsMonsterInCrossHead)
+                        {
+                            rayshoot();
+                        }
+                        if(IsMonsterInCrossHead)
+                        {
+                        
+                        rayshoot( MonsterPos);
+                        }
                     }
                 }
+                
             }
+            
+            if (currentAmmo == 0)
+            {
+                reloadUI.SetActive(true);
+            }
+
         }
     }
 
@@ -153,10 +163,7 @@ public class Gun : MonoBehaviour
 
         currentAmmo--;
         timeSinceLastShot = 0;
-        if(currentAmmo == 0)
-        {
-            reloadUI.SetActive(true);
-        }
+
     }
 
 
@@ -226,5 +233,6 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(delay);
         instance.SetActive(false);
     }
+
 
 }

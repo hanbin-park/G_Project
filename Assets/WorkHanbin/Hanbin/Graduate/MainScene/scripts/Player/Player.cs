@@ -120,7 +120,15 @@ public class Player : MonoBehaviour
                 
                 
                 introTimeLine.SetActive(false);
-                bgm.Play();
+                if(bgm.isPlaying)
+                {
+                    return;
+                }
+                else
+                {
+                    bgm.Play();
+                }
+                
                 getGun.Play();
 
                 HPImage[0].SetActive(true);
