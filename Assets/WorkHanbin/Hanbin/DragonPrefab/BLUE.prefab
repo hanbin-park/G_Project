@@ -1830,10 +1830,10 @@ MonoBehaviour:
   destination: {fileID: 0}
   IslookingMonster: 1
   IsComingMonster: 0
-  IsAttackMonster: 1
+  IsAttackMonster: 0
   attackRange: 30
   attackPeriod: 4
-  health: 10
+  health: 50
   fadeTime: 1
   dieDelayTime: 1
   monsterScore: 10

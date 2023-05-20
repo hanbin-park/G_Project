@@ -375,9 +375,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69e38c19c75626498f5b3cb00586680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0.5
+  waitTime: 0
   haveWaitTime: 0
-  IsCrossAwayMonster: 1
+  IsCrossAwayMonster: 0
   CrossingTime: 1
   destination: {fileID: 0}
   IslookingMonster: 1

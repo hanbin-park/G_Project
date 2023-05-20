@@ -267,13 +267,20 @@ MonoBehaviour:
   IslookingMonster: 1
   IsComingMonster: 0
   IsAttackMonster: 0
-  attackRange: 3
+  attackRange: 30
   attackPeriod: 3
-  health: 100
+  health: 10
   fadeTime: 1
   dieDelayTime: 1
   monsterScore: 10
   moveSpeed: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  bullet: {fileID: 0}
+  monsterAttack: {fileID: 0}
+  monsterHit: {fileID: 0}
+  monsterDie: {fileID: 0}
 --- !u!1 &1966049751294606043
 GameObject:
   m_ObjectHideFlags: 0

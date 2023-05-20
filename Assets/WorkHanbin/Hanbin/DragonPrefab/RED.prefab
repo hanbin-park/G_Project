@@ -455,7 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 0
   haveWaitTime: 0
-  IsCrossAwayMonster: 1
+  IsCrossAwayMonster: 0
   CrossingTime: 1
   destination: {fileID: 0}
   IslookingMonster: 1
@@ -463,7 +463,7 @@ MonoBehaviour:
   IsAttackMonster: 0
   attackRange: 30
   attackPeriod: 4
-  health: 30
+  health: 10
   fadeTime: 1
   dieDelayTime: 1
   monsterScore: 10
