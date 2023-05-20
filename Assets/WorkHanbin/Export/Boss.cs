@@ -5,6 +5,8 @@ using UnityEngine;
 public class Boss : Monster
 {
     [Header("보스패턴 정형화")]
+
+    public  bool patternOn;
     public int[] pattern;
     public int patCount=0;
 
@@ -12,6 +14,7 @@ public class Boss : Monster
     public Transform[] monsterSpawn;
    public GameObject[] monster;
   public  float patternStartTime;
+
 
 Animator bossAnim;
 
@@ -46,7 +49,7 @@ Animator bossAnim;
     public void DoPattern(int pat)
     {
         patCount++;
-        haveWaitTime=false;
+        
         if(pat==1)
         {
             bossAnim.SetBool("Attack1",true);

@@ -10,7 +10,7 @@ public class Boss_Attack1 : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        boss= animator.GetComponent<Boss>();
-       boss_Idle=animator.GetComponent<Boss_Idle>();
+        
         boss.SpawnDragon();
 
     }
@@ -34,7 +34,7 @@ public class Boss_Attack1 : StateMachineBehaviour
             monsterCount--;
             if(monsterCount==0)
             {
-                boss_Idle.patternOn=true;
+                boss.patternOn=true;
                 monsterCount=3;
             }
     }

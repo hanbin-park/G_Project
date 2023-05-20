@@ -6,7 +6,7 @@ public class Monster : MonoBehaviour, IDamageable
 {
 
 
-    private bool isDead = false;
+   public bool isDead = false;
 
     AudioSource[] audios;
     [SerializeField]

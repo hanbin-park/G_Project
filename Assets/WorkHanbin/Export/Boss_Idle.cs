@@ -7,7 +7,7 @@ public class Boss_Idle : StateMachineBehaviour
     enum state {pattern1,pattern2,pattern3};
     Transform BossTransform;
     public Boss boss;
-    public bool patternOn;
+    
     float patterntime;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -23,14 +23,14 @@ public class Boss_Idle : StateMachineBehaviour
     {
         if (boss.haveWaitTime)
         {
-            if (patternOn)
+            if (boss.patternOn)
             {
                 patterntime += Time.deltaTime;
             }
-            if (patterntime > 3.0f)
+            if (patterntime > 2.0f)
 
             {
-                patternOn = false;
+              boss.patternOn = false;
                 patterntime = 0;
 
                 boss.DoPattern(boss.pattern[boss.patCount]);
