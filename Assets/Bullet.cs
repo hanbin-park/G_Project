@@ -5,12 +5,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, IDamageable
 {
    
-    GameObject player = null;
+    public GameObject player = null;
 
 
 
     [SerializeField]
-    float speed = 3.0f;
+    public float speed = 3.0f;
     private float currentSpeed =0;
     [SerializeField]
     //LayerMask layerMask = 6;
@@ -19,23 +19,30 @@ public class Bullet : MonoBehaviour, IDamageable
     void Awake()
     {
         
-        player= GameObject.Find("cineCamera");////////////////////////////////////////////이거 수정할것!
+      //  player= GameObject.Find("cineCamera");////////////////////////////////////////////이거 수정할것!
      
     }
 
    
     void Update()
     {
-  
-            if(currentSpeed<=speed )
+      Move();
+            
+ 
+    }
+
+  public virtual void Move()
+  {
+    if(currentSpeed<=speed )
              currentSpeed += speed*Time.deltaTime;
+
 
              transform.position += transform.up * currentSpeed *Time.deltaTime;
 
              Vector3 direction= (player.transform.position-transform.position).normalized;
-             transform.up= Vector3.Lerp(transform.up,direction,0.25f);
- 
-    }
+             transform.up= Vector3.Lerp(direction,transform.up*0.4f,0.25f);
+
+  }
   private void OnTriggerEnter(Collider other)
   {
     if(other.tag=="Player")

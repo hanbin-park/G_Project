@@ -6,40 +6,40 @@ public class Monster : MonoBehaviour, IDamageable
 {
 
 
-private bool isDead = false;
+    private bool isDead = false;
 
-AudioSource [] audios ;
-[SerializeField]
-private float waitTime=1;
+    AudioSource[] audios;
+    [SerializeField]
+    private float waitTime = 1;
 
-[SerializeField]
-   private bool haveWaitTime= false;
+    [SerializeField]
+    public bool haveWaitTime = false;
 
-[Header("어떤 몬스터인지 조절하는 변수들")]
+    [Header("어떤 몬스터인지 조절하는 변수들")]
 
     public bool IsCrossAwayMonster = false;
     public float CrossingTime = 3f;
-    private float currentTime=0;
+    private float currentTime = 0;
     private Vector3 thisPos;
-    public GameObject destination ;
+    public GameObject destination;
 
 
-[SerializeField]
+    [SerializeField]
     private bool IslookingMonster = true;
-[SerializeField]
- private bool IsComingMonster = false;
+    [SerializeField]
+    private bool IsComingMonster = false;
     public bool IsAttackMonster = false;
     public float attackRange = 30.0f;
-    public float attackPeriod= 3.0f;
+    public float attackPeriod = 3.0f;
 
-//change
-  
+    //change
 
-  private  float lookSpeed= 10;
 
-  [Header("몬스터 스테이터스")]
-//change
-    Animator m_anim;
+    private float lookSpeed = 10;
+
+    [Header("몬스터 스테이터스")]
+    //change
+   protected Animator m_anim;
     public int health = 100;
     public float fadeTime = 1.0f;
     public float dieDelayTime = 1.0f;
@@ -50,18 +50,23 @@ private float waitTime=1;
     public float moveSpeed = 1;
 
 
-//change
+    //change
     GameObject targetplayer;
-       //
+    //
     Rigidbody rigid;
     BoxCollider boxCollider;
-    Material mat;
+
+    protected string myTag;
+
+
+
 
     private void Start()
     {
-//change
-       targetplayer = GameObject.Find("cineCamera");
-       //
+        //change
+        myTag = gameObject.tag;
+        targetplayer = GameObject.Find("cineCamera");
+        //
         m_anim = gameObject.GetComponent<Animator>();
         scoreUI = FindObjectOfType<Score>();
     }
@@ -70,54 +75,58 @@ private float waitTime=1;
     private void Awake()
     {
         bulletPos = transform.Find("bulletPos");
-        thisPos=GetComponent<Transform>().position;
+        thisPos = GetComponent<Transform>().position;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        mat = GetComponentInChildren<SkinnedMeshRenderer>().material;
 
-        
+
+
     }
     void Update()
     {
-            if(haveWaitTime)//일정 시간 지난 후 실행
+        if (haveWaitTime)//일정 시간 지난 후 실행
         {
-            if(IsCrossAwayMonster)
+            if (myTag == "Monster")
             {
-             
-                currentTime += Time.deltaTime;
-                if(currentTime<=CrossingTime)
-                 transform.position = Vector3.Lerp(thisPos, destination.transform.position,  currentTime/CrossingTime);
-                 transform.LookAt(destination.transform);
-            }
-
-            else
-            {
-                if (IslookingMonster)
+                if (IsCrossAwayMonster)
                 {
-                    Look();
 
+                    currentTime += Time.deltaTime;
+                    if (currentTime <= CrossingTime)
+                        transform.position = Vector3.Lerp(thisPos, destination.transform.position, currentTime / CrossingTime);
+                    transform.LookAt(destination.transform);
+                }
 
-                    if (IsAttackMonster)
+                else
+                {
+                    if (IslookingMonster)
                     {
-                        attackTime += Time.deltaTime;
-                        
-                        if (attackPeriod <= attackTime)
+                        Look();
+
+
+                        if (IsAttackMonster)
                         {
-                            if(isDead)////이거 두줄 수정
-                            return;////이거 두줄 수정
-                            attackTime = 0f;
-                            AttackMonster();
+                            attackTime += Time.deltaTime;
+
+                            if (attackPeriod <= attackTime)
+                            {
+                                if (isDead)////이거 두줄 수정
+                                    return;////이거 두줄 수정
+                                attackTime = 0f;
+                                AttackMonster();
+                            }
                         }
+
                     }
 
                 }
-
             }
+
         }
 
     }
-//change
-    private void Look()// player를 바라보는 몬스터 함수
+    //change
+    public virtual void Look()// player를 바라보는 몬스터 함수
     {
         Vector3 playerDirection = targetplayer.transform.position - transform.position;
         playerDirection.y = 0.0f;
@@ -125,19 +134,19 @@ private float waitTime=1;
         transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, lookSpeed * Time.deltaTime);
     }
 
-     private void Attack()
+    private void Attack()
     {
 
-        
+
 
 
 
     }
 
-//change
+    //change
 
 
-   
+
 
     public void Damage(int damage)
     {
@@ -164,7 +173,7 @@ private float waitTime=1;
 
 
     private IEnumerator GetHit()
-    {   
+    {
         monsterHit.Play();
         m_anim.SetTrigger("gethit");
 
@@ -184,18 +193,18 @@ private float waitTime=1;
 
         GameObject checkDragon;
         checkDragon = transform.GetChild(0).gameObject;
-        if(checkDragon.name == "DeformationSystem")
+        if (checkDragon.name == "DeformationSystem")
         {
             GameObject liveL;
             liveL = transform.GetChild(1).GetChild(0).GetChild(4).gameObject;
             GameObject liveR;
-            liveR = transform.GetChild(1).GetChild(0).GetChild(5).gameObject;        
+            liveR = transform.GetChild(1).GetChild(0).GetChild(5).gameObject;
             GameObject deadL;
             deadL = transform.GetChild(1).GetChild(0).GetChild(2).gameObject;
             GameObject deadR;
             deadR = transform.GetChild(1).GetChild(0).GetChild(3).gameObject;
-            
-            if(liveL != null && liveR != null && deadL != null &&  deadR != null)
+
+            if (liveL != null && liveR != null && deadL != null && deadR != null)
             {
                 liveL.SetActive(false);
                 liveR.SetActive(false);
@@ -226,52 +235,52 @@ private float waitTime=1;
             c.a = Mathf.Lerp(1.0f, 0.0f, t);
             yield return null;
         }*/
-        
+
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-            if(IsCrossAwayMonster)
-            {
-                
-                if(other.tag=="Destination")
-                {
+        if (IsCrossAwayMonster)
+        {
 
-                    Debug.Log("arrived!");
-                    //Destroy(other.gameObject);
-                    other.gameObject.SetActive(false);
-                    IsCrossAwayMonster = false;
-                }
+            if (other.tag == "Destination")
+            {
+
+                Debug.Log("arrived!");
+                //Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
+                IsCrossAwayMonster = false;
             }
+        }
     }
 
     public void SethaveWaitTime()
     {
-        
-       StartCoroutine(changeState());
+
+        StartCoroutine(changeState());
     }
 
 
-IEnumerator changeState()
-{
-    yield return new WaitForSeconds(waitTime);
-    Debug.Log("changed!");
-    haveWaitTime= true;
-   
-}
+    IEnumerator changeState()
+    {
+        yield return new WaitForSeconds(waitTime);
+        Debug.Log("changed!");
+        haveWaitTime = true;
+
+    }
     // Update is called once per frame
 
 
-[Header("공격 몬스터일때 설정")]
+    [Header("공격 몬스터일때 설정")]
     [SerializeField]
     LayerMask targetLayer;
     private float attackTime = 0;
-[SerializeField]
-    
+    [SerializeField]
+
     public GameObject bullet;
     private Transform bulletPos;
-    
+
     public AudioSource monsterAttack;
     public AudioSource monsterHit;
     public AudioSource monsterDie;
@@ -282,12 +291,15 @@ IEnumerator changeState()
         if (Physics.CheckSphere(transform.position, attackRange, targetLayer))
         {
             m_anim.SetTrigger("Attack");
-            
+
             monsterAttack.Play();
 
-            float ran=UnityEngine.Random.Range(-10,-7);
+            float ran = UnityEngine.Random.Range(-10, -7);
             GameObject instance = Instantiate(bullet, bulletPos.position, Quaternion.identity);
-            instance.GetComponent<Rigidbody>().velocity= new Vector3(0,1,ran).normalized*1;
+            instance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0.5f, ran).normalized * 1;
         }
     }
+
+
+    
 }
