@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss_Attack1 : StateMachineBehaviour
 {
-   int monsterCount=3;
+   public static int monsterCount=5;
     Boss_Idle boss_Idle;
    Boss boss;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -12,7 +12,7 @@ public class Boss_Attack1 : StateMachineBehaviour
        boss= animator.GetComponent<Boss>();
         
         boss.SpawnDragon();
-
+        boss.BossLookMethod();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -28,16 +28,6 @@ public class Boss_Attack1 : StateMachineBehaviour
     }
 
  
-
-    void DestroyedMonster()
-    {
-            monsterCount--;
-            if(monsterCount==0)
-            {
-                boss.patternOn=true;
-                monsterCount=3;
-            }
-    }
 
 
 

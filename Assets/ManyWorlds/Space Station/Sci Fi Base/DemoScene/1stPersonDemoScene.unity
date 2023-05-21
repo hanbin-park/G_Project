@@ -2395,5 +2395,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpaceBase
       objectReference: {fileID: 0}
+    - target: {fileID: 451707255530199364, guid: 93cc90aa35eda764d858c0a488e4ccb7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454758409949567188, guid: 93cc90aa35eda764d858c0a488e4ccb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 454758409949567188, guid: 93cc90aa35eda764d858c0a488e4ccb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2683
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93cc90aa35eda764d858c0a488e4ccb7, type: 3}

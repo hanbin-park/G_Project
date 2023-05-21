@@ -8,9 +8,11 @@ public class MiniDragon : MonoBehaviour
     public Rigidbody rb;
     public float rotateSpeed = 1f;
     public float initialDelay = 1f;
-    public float maxSpeed=5.0f;
+    public float maxSpeed=6.0f;
 
 
+    public GameObject boss;
+    private Boss bossScript;
 
   private float speed = 0f;
     private GameObject player;
@@ -26,8 +28,8 @@ private bool isReady = false;
     private float currentSpeed = 0;
     private void Awake()
     {
-
-    }
+        boss=GameObject.Find("Boss_RED");
+        bossScript=boss.GetComponent<Boss>();    }
 
     void Start()
     {
@@ -43,6 +45,7 @@ private bool isReady = false;
       Invoke("ActivateHoming", initialDelay);
       monster= GetComponent<Monster>();
       Anim=GetComponent<Animator>();
+      speed=3;
 
     }
 
@@ -99,4 +102,14 @@ private bool isReady = false;
         }
     }
   
+
+  private void OnDestroy() {
+    
+    Boss_Attack1.monsterCount--;
+   if(Boss_Attack1.monsterCount==0)
+   {
+    bossScript.patternOn=true;
+    Boss_Attack1.monsterCount=3;
+   } 
+  }
 }

@@ -136,7 +136,8 @@ MonoBehaviour:
   rotateSpeed: 1
   initialDelay: 1
   maxSpeed: 6
-  currentSpeed: 0
+  boss: {fileID: 0}
+  currentSpeed: 1
 --- !u!114 &627220444747383058
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56d80829dc5df5438f94b3715216dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   crossHead: {fileID: 5518310986472776457}
   autoTargetedMonsterUI: {fileID: 5518310984989152808}
   crossHeadImage: {fileID: 21300000, guid: af2f4715eac418644ba7517f28f94399, type: 3}
@@ -301,6 +302,7 @@ MonoBehaviour:
   Istargeted: 0
   Player: {fileID: 0}
   targetedUI: {fileID: 5518310985666143113}
+  hitOn: {fileID: 0}
 --- !u!1 &5518310985140583048
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,6 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56d80829dc5df5438f94b3715216dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   crossHead: {fileID: 5518310986670861534}
   autoTargetedMonsterUI: {fileID: 5518310985143506655}
   crossHeadImage: {fileID: 21300000, guid: af2f4715eac418644ba7517f28f94399, type: 3}
@@ -486,6 +489,7 @@ MonoBehaviour:
   Istargeted: 0
   Player: {fileID: 0}
   targetedUI: {fileID: 5518310986323964157}
+  hitOn: {fileID: 0}
 --- !u!1 &5518310985178401142
 GameObject:
   m_ObjectHideFlags: 0

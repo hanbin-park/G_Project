@@ -9,7 +9,7 @@ public class Score : MonoBehaviour
 
 
    int scoreInt;
-    TMP_Text textScore;
+    TMP_Text textScore; //string 연산 
     public  float score =0;
      
     
@@ -45,7 +45,8 @@ public class Score : MonoBehaviour
     {
         this.score +=killscore;
          scoreInt= (int)this.score;
-        textScore.text= scoreInt.ToString();
+    
+        textScore.text= "score :"+ scoreInt.ToString();
         GameManager.Instance.playerScore+=killscore;
     }
 

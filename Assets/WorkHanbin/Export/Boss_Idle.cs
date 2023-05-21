@@ -15,7 +15,7 @@ public class Boss_Idle : StateMachineBehaviour
     {
         BossTransform = animator.GetComponent<Transform>();
         boss = animator.GetComponent<Boss>();
-
+   
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

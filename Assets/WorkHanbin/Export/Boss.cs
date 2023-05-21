@@ -15,7 +15,7 @@ public class Boss : Monster
    public GameObject[] monster;
   public  float patternStartTime;
 
-
+    private GameObject player;
 Animator bossAnim;
 
 
@@ -23,10 +23,25 @@ Animator bossAnim;
     [Header("보스패턴2")]
 //플레이어에게 다가오고 그동안 약점 3곳 때리기
 
-    Transform[] RandomPos;
+   public Transform[] RandomPos;
+   public Transform origintransform;
+
+    public GameObject FireBall;
     
+
+
+
+
+
+
+
+
+
+
+
     void Start()
     {
+       player= GameObject.FindWithTag("Player");
         bossAnim=GetComponent<Animator>();
         pattern = new int[10]; 
         pattern[0]=1;
@@ -91,16 +106,14 @@ bossAnim.SetBool("Attack3",false);
 
 
 
-
-private void OnCollisionEnter(Collision other) {
-    if(other.gameObject.tag=="Player")
+private void OnTriggerEnter(Collider other) 
+{
+     if(other.gameObject.tag=="Player")
     {
         var comp= other.gameObject.GetComponent<Player>();
     
     }
 }
-
-
 
 
 
@@ -124,10 +137,33 @@ IEnumerator PatternStartTime(float time)
     var dragon2 = Instantiate(monster[1],monsterSpawn[1].position,Quaternion.identity);
     yield return new WaitForSeconds(0.2f);
     var dragon3 = Instantiate(monster[2],monsterSpawn[2].position,Quaternion.identity);
-
+ yield return new WaitForSeconds(0.5f);
+    var dragon4 = Instantiate(monster[3],monsterSpawn[3].position,Quaternion.identity);
+     var dragon5 = Instantiate(monster[4],monsterSpawn[4].position,Quaternion.identity);
 }
 
+float elapsedTime = 0f;
+        
 
 
+public void BossLookMethod()
+{
+    StartCoroutine(BossLook());
+}
+
+private IEnumerator BossLook()
+{
+     Quaternion rotation = Quaternion.LookRotation(player.gameObject.transform.position-this.gameObject.transform.position);
+         while (elapsedTime < 0.5f)
+        {
+            float t = elapsedTime / 0.5f;
+            this.gameObject.transform.rotation = Quaternion.Lerp(this.gameObject.transform.rotation, rotation, t);
+
+            elapsedTime += Time.deltaTime;
+            yield return null; // 다음 프레임까지 대기
+        }
+    elapsedTime=0;
+}      
+           
 
 }
