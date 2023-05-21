@@ -402,7 +402,7 @@ Animator:
   m_GameObject: {fileID: 642813215179136055}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d15d20e8abd659243b5dd5a47c865b1e, type: 2}
+  m_Controller: {fileID: 9100000, guid: eaa9f42ae16ba1d4c9f7a2357461aa11, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 0
   haveWaitTime: 0
-  IsCrossAwayMonster: 0
+  IsCrossAwayMonster: 1
   CrossingTime: 1
   destination: {fileID: 0}
   IslookingMonster: 1
@@ -463,7 +463,7 @@ MonoBehaviour:
   IsAttackMonster: 0
   attackRange: 30
   attackPeriod: 4
-  health: 10
+  health: 30
   fadeTime: 1
   dieDelayTime: 1
   monsterScore: 10
@@ -486,7 +486,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4cbb6e826867bb048ba3466a95d7b598, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -582,7 +582,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d695609a48b10a9499269801f73dfa5c, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -678,7 +678,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 27b112307fea0a449953582e85917568, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
