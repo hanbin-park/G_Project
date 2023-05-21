@@ -402,7 +402,7 @@ Animator:
   m_GameObject: {fileID: 642813215179136055}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eaa9f42ae16ba1d4c9f7a2357461aa11, type: 2}
+  m_Controller: {fileID: 9100000, guid: d15d20e8abd659243b5dd5a47c865b1e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -453,6 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69e38c19c75626498f5b3cb00586680, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   waitTime: 0
   haveWaitTime: 0
   IsCrossAwayMonster: 1
