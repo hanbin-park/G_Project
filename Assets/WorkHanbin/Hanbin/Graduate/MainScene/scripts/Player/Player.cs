@@ -120,14 +120,7 @@ public class Player : MonoBehaviour
                 
                 
                 introTimeLine.SetActive(false);
-                if(bgm.isPlaying)
-                {
-                    return;
-                }
-                else
-                {
-                    bgm.Play();
-                }
+                
                 
                 getGun.Play();
 
@@ -139,6 +132,15 @@ public class Player : MonoBehaviour
                 timeline1.SetActive(true);
                 Destroy(nearOjbect);//집은 무기는 삭제
                 nearOjbect = null;
+
+                if(bgm.isPlaying)
+                {
+                    return;
+                }
+                else
+                {
+                    bgm.Play();
+                }
             }
         }
     }
