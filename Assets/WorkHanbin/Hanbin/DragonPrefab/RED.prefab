@@ -456,7 +456,7 @@ MonoBehaviour:
   isDead: 0
   waitTime: 0
   haveWaitTime: 0
-  IsCrossAwayMonster: 1
+  IsCrossAwayMonster: 0
   CrossingTime: 1
   destination: {fileID: 0}
   IslookingMonster: 1
@@ -487,7 +487,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4cbb6e826867bb048ba3466a95d7b598, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -583,7 +583,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d695609a48b10a9499269801f73dfa5c, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -679,7 +679,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 27b112307fea0a449953582e85917568, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -151,6 +151,15 @@ public class Player : MonoBehaviour
     if (other.tag == "Monster")
             {
                 hp--;
+
+                //몬스터 충돌 1회 공격 후 삭제
+                if(other.name != "Boss_RED")
+                {
+                    Destroy(other.gameObject);
+                    GameManager.Instance.monsterCount -= 1;
+                    GameManager.Instance.stage++;
+                }
+
                 UpdateLifeIcon(hp);
                 if(hp==0)
                 {
