@@ -10,6 +10,8 @@ public class Boss : Monster
     public int[] pattern;
     public int patCount=0;
 
+   
+
     [Header("보스패턴1")]
     public Transform[] monsterSpawn;
    public GameObject[] monster;

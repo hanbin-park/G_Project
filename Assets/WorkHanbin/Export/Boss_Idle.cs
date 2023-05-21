@@ -6,37 +6,40 @@ public class Boss_Idle : StateMachineBehaviour
 {
     enum state {pattern1,pattern2,pattern3};
     Transform BossTransform;
-    public Boss boss;
+    public Boss bosss;
+
     
     float patterntime;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        BossTransform = animator.GetComponent<Transform>();
-        boss = animator.GetComponent<Boss>();
-   
+       
+     
+        bosss= animator.GetComponent<Boss>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (boss.haveWaitTime)
+       
+        if (bosss.haveWaitTime)
         {
-            if (boss.patternOn)
+            if (bosss.patternOn)
             {
                 patterntime += Time.deltaTime;
             }
             if (patterntime > 2.0f)
 
             {
-              boss.patternOn = false;
+              bosss.patternOn = false;
                 patterntime = 0;
 
-                boss.DoPattern(boss.pattern[boss.patCount]);
+                bosss.DoPattern(bosss.pattern[bosss.patCount]);
             }
         }
 
+      
 
 
 

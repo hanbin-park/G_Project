@@ -6,14 +6,14 @@ public class Monster : MonoBehaviour, IDamageable
 {
 
 
-private bool isDead = false;
+public bool isDead = false;
 
 AudioSource [] audios ;
 [SerializeField]
 private float waitTime=1;
 
 [SerializeField]
-   private bool haveWaitTime= false;
+  public bool haveWaitTime= false;
 
 [Header("어떤 몬스터인지 조절하는 변수들")]
 
