@@ -39,7 +39,7 @@ private float waitTime=1;
 
   [Header("몬스터 스테이터스")]
 //change
-    Animator m_anim;
+   public Animator m_anim;
     public int health = 100;
     public float fadeTime = 1.0f;
     public float dieDelayTime = 1.0f;
@@ -139,7 +139,7 @@ private float waitTime=1;
 
    
 
-    public void Damage(int damage)
+    virtual public  void Damage(float damage)
     {
         health -= (int)damage;
 
@@ -165,7 +165,9 @@ private float waitTime=1;
 
     private IEnumerator GetHit()
     {   
+        if(monsterHit!=null)
         monsterHit.Play();
+
         m_anim.SetTrigger("gethit");
 
         // m_anim.SetBool("GetHit",false);
@@ -206,6 +208,7 @@ private float waitTime=1;
 
         m_anim.SetTrigger("IsDead");
 
+      if(monsterDie!=null)
         monsterDie.Play();
 
         yield return new WaitForSeconds(dieDelayTime);

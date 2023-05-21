@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour, IDamageable
     }
   }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
        Destroy(gameObject);
     }
