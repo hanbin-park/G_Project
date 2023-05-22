@@ -10,6 +10,8 @@ public class PosMove : MonoBehaviour
     private float runningTime = 0f;
     private float yPos = 0f;
     private float xPos = 0f;
+    
+
     void Start()
     {
 
@@ -18,9 +20,10 @@ public class PosMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int k = Random.Range(0, 5);
         runningTime += Time.deltaTime * speed;
-        yPos = Mathf.Sin(runningTime);
-        xPos = Mathf.Cos(runningTime);
-        this.transform.position = new Vector3(63+xPos,92+yPos,-80);
+        yPos = Mathf.Sin(runningTime)*k;
+        xPos = Mathf.Cos(runningTime)*k;
+        this.transform.position = new Vector3(64-xPos,93+yPos,-93);
     }
 }
