@@ -10,7 +10,7 @@ public bool isDead = false;
 
 AudioSource [] audios ;
 [SerializeField]
-private float waitTime=1;
+public float waitTime=1;
 
 [SerializeField]
   public bool haveWaitTime= false;
@@ -40,7 +40,7 @@ private float waitTime=1;
   [Header("몬스터 스테이터스")]
 //change
    public Animator m_anim;
-    public int health = 100;
+    public float health = 100;
     public float fadeTime = 1.0f;
     public float dieDelayTime = 1.0f;
 
@@ -141,7 +141,7 @@ private float waitTime=1;
 
     virtual public  void Damage(float damage)
     {
-        health -= (int)damage;
+        health -= damage;
 
         if (health <= -0)
         {
@@ -249,14 +249,14 @@ private float waitTime=1;
             }
     }
 
-    public void SethaveWaitTime()
+    public virtual void SethaveWaitTime()
     {
         
        StartCoroutine(changeState());
     }
 
 
-IEnumerator changeState()
+IEnumerator  changeState()
 {
     yield return new WaitForSeconds(waitTime);
     Debug.Log("changed!");

@@ -1,12 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class Boss : Monster
 {
     [Header("보스패턴 정형화")]
 
-    public  bool patternOn;
+    public  bool patternOn =true;
+    private bool plz =true;
+    public bool HaveWaitTime
+    {
+        get
+        {
+            return haveWaitTime;
+        }
+        set
+        {
+            haveWaitTime=value;
+            if(haveWaitTime&&plz)
+            {
+                bossHPUI.UION=true;
+                plz=false;
+            }
+        }
+    }
+   
     public int[] pattern;
     public int patCount=0;
 
@@ -18,24 +36,23 @@ public class Boss : Monster
   public  float patternStartTime;
 
     private GameObject player;
-Animator bossAnim;
+public Animator bossAnim;
 
 
 
     [Header("보스패턴2")]
 //플레이어에게 다가오고 그동안 약점 3곳 때리기
 
-   public Transform[] RandomPos;
-   public Transform origintransform;
+   
+   public Transform fireBallTransform;
 
-    public GameObject FireBall;
+    public GameObject fireBall;
     
 
 
 
 
-
-
+    private BossHPUI bossHPUI;
 
 
 
@@ -44,7 +61,7 @@ Animator bossAnim;
     void Start()
     {
        player= GameObject.FindWithTag("Player");
-      
+        bossHPUI= GetComponent<BossHPUI>();
         //GetComponent<Animator>();
         pattern = new int[10]; 
         pattern[0]=1;
@@ -54,6 +71,7 @@ Animator bossAnim;
         {
             pattern[i]=Random.Range(1,3);
         }
+         
     }
 
 private void Awake() {
@@ -126,7 +144,7 @@ private void OnTriggerEnter(Collider other)
 
 override public  void Damage(float damage)
 {
-        health -= (int)damage;
+        health -= damage;
 
         if (health <= -0)
         {
@@ -153,7 +171,7 @@ override public  void Damage(float damage)
         if(monsterHit!=null)
         monsterHit.Play();
 
-        m_anim.SetTrigger("gethit");
+       
 
         // m_anim.SetBool("GetHit",false);
         yield return null;
@@ -168,7 +186,7 @@ override public  void Damage(float damage)
     {
 
         isDead = true;
-
+        bossHPUI.UION=false;
         GameObject checkDragon;
         checkDragon = transform.GetChild(0).gameObject;
         if(checkDragon.name == "DeformationSystem")
@@ -199,13 +217,23 @@ override public  void Damage(float damage)
         yield return new WaitForSeconds(dieDelayTime);
 
 
-        
+        bossHPUI.BossUI.SetActive(false);
         Destroy(gameObject);
     }
 
 
+public override void SethaveWaitTime()
+{
+    StartCoroutine(changeState());
+}
 
-
+IEnumerator  changeState()
+{
+    yield return new WaitForSeconds(waitTime);
+    Debug.Log("changed!");
+    HaveWaitTime= true;
+   
+}
 
 
 
@@ -254,7 +282,16 @@ IEnumerator PatternStartTime(float time)
     var dragon3 = Instantiate(monster[2],monsterSpawn[2].position,Quaternion.identity);
  yield return new WaitForSeconds(0.5f);
     var dragon4 = Instantiate(monster[3],monsterSpawn[3].position,Quaternion.identity);
+    yield return new WaitForSeconds(0.1f);
      var dragon5 = Instantiate(monster[4],monsterSpawn[4].position,Quaternion.identity);
+     yield return new WaitForSeconds(0.1f);
+      var dragon6 = Instantiate(monster[5],monsterSpawn[5].position,Quaternion.identity);
+      yield return new WaitForSeconds(0.1f);
+       var dragon7 = Instantiate(monster[6],monsterSpawn[6].position,Quaternion.identity);
+       yield return new WaitForSeconds(0.2f);
+        var dragon8 = Instantiate(monster[7],monsterSpawn[7].position,Quaternion.identity);
+        yield return new WaitForSeconds(0.1f);
+         var dragon9 = Instantiate(monster[8],monsterSpawn[8].position,Quaternion.identity);
 }
 
 float elapsedTime = 0f;
@@ -280,5 +317,25 @@ private IEnumerator BossLook()
     elapsedTime=0;
 }      
            
+
+
+
+
+///////////////////////////////공격패턴 2
+
+public void MakeFireBall()
+{
+    GameObject fireball=GameObject.Instantiate(fireBall,fireBallTransform.position,Quaternion.identity);
+
+    MoveAndScaleFireBall();
+    Invoke("ChasePlayer",2f);
+}
+
+private void MoveAndScaleFireBall()
+{
+    fireBall.transform.DOMoveY(fireBall.transform.position.y+5f,2f);
+    fireBall.transform.DOScale(Vector3.one*2f,2f);
+}
+
 
 }
