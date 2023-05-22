@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
                 {
                 hasWeapon[index] = false;
                 weaponUI[index].SetActive(false);
+                
                 }
 
                 //갖고있는 무기체크 후 그거에 맞는 UI on
