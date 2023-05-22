@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         cameras[GameManager.Instance.stage+1].SetActive(true);
         GameManager.Instance.stage++;
 
-        if(GameManager.Instance.stage == 12)
+        if(GameManager.Instance.stage == 20)
         {
             Cursor.visible = true;
             SceneManager.LoadScene("EndScene");

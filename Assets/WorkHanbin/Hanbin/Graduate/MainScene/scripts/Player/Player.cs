@@ -157,7 +157,11 @@ public class Player : MonoBehaviour
                 {
                     Destroy(other.gameObject);
                     GameManager.Instance.monsterCount -= 1;
-                    GameManager.Instance.stage++;
+                    if(GameManager.Instance.monsterCount == 0)
+                    {
+                        GameManager.Instance.NextStage();
+                    }
+
                 }
 
                 UpdateLifeIcon(hp);
