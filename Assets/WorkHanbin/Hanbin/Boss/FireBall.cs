@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-public class FireBall : MonoBehaviour
+public class FireBall : MonoBehaviour, IDamageable
 {
+
+    public float MaxHp = 250;
+    private float hp;
     private Transform player;
     private bool isReady = false;
     private float speed = 3f;
@@ -16,12 +19,17 @@ public class FireBall : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject boss;
+    private Boss bossScript;
+    private Collider collider;
+    
     void Start()
     {
-
+        hp = MaxHp;
         rb = GetComponent<Rigidbody>();
         Invoke("ActivateHoming", 2f);
-        boss=GameObject.Find("Boss_RED");
+        boss = GameObject.Find("Boss_RED");
+        bossScript=GetComponent<Boss>();
+        collider= GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -63,16 +71,38 @@ public class FireBall : MonoBehaviour
     {
         isReady = true;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        collider.enabled=true;
+        
     }
 
 
-    private void OnTriggerEnter(Collider other) {
-        
-        if(other.gameObject.CompareTag("Player"))
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.CompareTag("Player"))
         {
-            var BossScrpt = boss.GetComponent<Boss>();
-            BossScrpt.patternOn=true;
+            var BossScript = boss.GetComponent<Boss>();
+            BossScript.patternOn = true;
+            
+            Destroy(this.gameObject);
+            
+        }
+    }
+
+    public void Damage(float damage)
+    {
+        if (hp >0)
+        {
+             hp -= damage;
+            
+      
+        }
+        else if(hp<=0)
+            {
+                var BossScript = boss.GetComponent<Boss>();
+            BossScript.patternOn=true;
             Destroy(this.gameObject);
         }
     }
+
 }

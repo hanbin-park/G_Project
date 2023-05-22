@@ -216,12 +216,12 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
-        reloadUI.SetActive(false);
+        
         reloadGun.Play();
         reloading = true;
-
+    
         yield return new WaitForSeconds(reloadTime);
-
+        reloadUI.SetActive(false);
         currentAmmo = magSize;
         reloading = false;
 

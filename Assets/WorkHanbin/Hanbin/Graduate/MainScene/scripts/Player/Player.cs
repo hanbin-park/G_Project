@@ -123,10 +123,12 @@ public class Player : MonoBehaviour
                 
                 
                 getGun.Play();
+                for(int i=0;i<hp;i++)
+                {
+                HPImage[i].SetActive(true);
 
-                HPImage[0].SetActive(true);
-                HPImage[1].SetActive(true);
-                HPImage[2].SetActive(true);
+                }
+               
                 UserUi.SetActive(true);
 
                 timeline1.SetActive(true);

@@ -333,8 +333,8 @@ public void MakeFireBall()
 
 private void MoveAndScaleFireBall()
 {
-    fireBall.transform.DOMoveY(fireBall.transform.position.y+5f,2f);
-    fireBall.transform.DOScale(Vector3.one*2f,2f);
+    fireBall.transform.DOMoveY(fireBall.transform.position.y+10f,2f);
+    fireBall.transform.DOScale(Vector3.one*0.02f,2f);
 }
 
 
