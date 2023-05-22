@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss_Attack1 : StateMachineBehaviour
 {
-   public static int monsterCount=5;
+   public static int monsterCount=9;
     Boss_Idle boss_Idle;
    Boss boss;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

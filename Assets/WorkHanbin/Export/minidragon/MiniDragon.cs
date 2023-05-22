@@ -17,7 +17,7 @@ public class MiniDragon : MonoBehaviour
   private float speed = 0f;
     private GameObject player;
     private Animator Anim;
-    private Monster monster;
+    private SpawnMonster monster;
     private Transform target;
 private bool isReady = false;
 
@@ -43,7 +43,7 @@ private bool isReady = false;
 
         //new Vector3(x,y,2f)
       Invoke("ActivateHoming", initialDelay);
-      monster= GetComponent<Monster>();
+      monster= GetComponent<SpawnMonster>();
       Anim=GetComponent<Animator>();
       speed=3;
 

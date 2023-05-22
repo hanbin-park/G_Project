@@ -1,12 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class Boss : Monster
 {
     [Header("보스패턴 정형화")]
 
-    public  bool patternOn;
+    public  bool patternOn =true;
+    private bool plz =true;
+    public bool HaveWaitTime
+    {
+        get
+        {
+            return haveWaitTime;
+        }
+        set
+        {
+            haveWaitTime=value;
+            if(haveWaitTime&&plz)
+            {
+                bossHPUI.UION=true;
+                plz=false;
+            }
+        }
+    }
+   
     public int[] pattern;
     public int patCount=0;
 
@@ -18,24 +36,23 @@ public class Boss : Monster
   public  float patternStartTime;
 
     private GameObject player;
-Animator bossAnim;
+public Animator bossAnim;
 
 
 
     [Header("보스패턴2")]
 //플레이어에게 다가오고 그동안 약점 3곳 때리기
 
-   public Transform[] RandomPos;
-   public Transform origintransform;
+   
+   public Transform fireBallTransform;
 
-    public GameObject FireBall;
+    public GameObject fireBall;
     
 
 
 
 
-
-
+    private BossHPUI bossHPUI;
 
 
 
@@ -44,7 +61,8 @@ Animator bossAnim;
     void Start()
     {
        player= GameObject.FindWithTag("Player");
-        bossAnim=GetComponent<Animator>();
+        bossHPUI= GetComponent<BossHPUI>();
+        //GetComponent<Animator>();
         pattern = new int[10]; 
         pattern[0]=1;
         pattern[1]=2;
@@ -53,8 +71,12 @@ Animator bossAnim;
         {
             pattern[i]=Random.Range(1,3);
         }
+         
     }
 
+private void Awake() {
+      bossAnim=  m_anim;
+}
     // Update is called once per frame
     void Update()
     {
@@ -120,6 +142,125 @@ private void OnTriggerEnter(Collider other)
 
 
 
+override public  void Damage(int damage)
+{
+        health -= damage;
+
+        if (health <= -0)
+        {
+            Collider cd = gameObject.GetComponent<Collider>();
+            cd.enabled = false;
+            StartCoroutine(BossDie());
+
+            return;
+        }
+        else
+        {
+
+
+            StartCoroutine(GetHit());
+        }
+
+
+
+    }
+
+
+    private IEnumerator GetHit()
+    {   
+        if(monsterHit!=null)
+        monsterHit.Play();
+
+       
+
+        // m_anim.SetBool("GetHit",false);
+        yield return null;
+
+
+    }
+
+    // Start is called before the first frame update
+
+
+    private IEnumerator BossDie()
+    {
+
+        isDead = true;
+        bossHPUI.UION=false;
+        GameObject checkDragon;
+        checkDragon = transform.GetChild(0).gameObject;
+        if(checkDragon.name == "DeformationSystem")
+        {
+            GameObject liveL;
+            liveL = transform.GetChild(1).GetChild(0).GetChild(4).gameObject;
+            GameObject liveR;
+            liveR = transform.GetChild(1).GetChild(0).GetChild(5).gameObject;        
+            GameObject deadL;
+            deadL = transform.GetChild(1).GetChild(0).GetChild(2).gameObject;
+            GameObject deadR;
+            deadR = transform.GetChild(1).GetChild(0).GetChild(3).gameObject;
+            
+            if(liveL != null && liveR != null && deadL != null &&  deadR != null)
+            {
+                liveL.SetActive(false);
+                liveR.SetActive(false);
+                deadL.SetActive(true);
+                deadR.SetActive(true);
+            }
+        }
+
+        m_anim.SetTrigger("IsDead");
+
+      if(monsterDie!=null)
+        monsterDie.Play();
+
+        yield return new WaitForSeconds(dieDelayTime);
+
+
+        bossHPUI.BossUI.SetActive(false);
+        Destroy(gameObject);
+    }
+
+
+public override void SethaveWaitTime()
+{
+    StartCoroutine(changeState());
+}
+
+IEnumerator changeState()
+{
+    yield return new WaitForSeconds(waitTime);
+    Debug.Log("changed!");
+    HaveWaitTime= true;
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /////////////////////////////공격패턴 1
 
@@ -141,7 +282,16 @@ IEnumerator PatternStartTime(float time)
     var dragon3 = Instantiate(monster[2],monsterSpawn[2].position,Quaternion.identity);
  yield return new WaitForSeconds(0.5f);
     var dragon4 = Instantiate(monster[3],monsterSpawn[3].position,Quaternion.identity);
+    yield return new WaitForSeconds(0.1f);
      var dragon5 = Instantiate(monster[4],monsterSpawn[4].position,Quaternion.identity);
+     yield return new WaitForSeconds(0.1f);
+      var dragon6 = Instantiate(monster[5],monsterSpawn[5].position,Quaternion.identity);
+      yield return new WaitForSeconds(0.1f);
+       var dragon7 = Instantiate(monster[6],monsterSpawn[6].position,Quaternion.identity);
+       yield return new WaitForSeconds(0.2f);
+        var dragon8 = Instantiate(monster[7],monsterSpawn[7].position,Quaternion.identity);
+        yield return new WaitForSeconds(0.1f);
+         var dragon9 = Instantiate(monster[8],monsterSpawn[8].position,Quaternion.identity);
 }
 
 float elapsedTime = 0f;
@@ -167,5 +317,25 @@ private IEnumerator BossLook()
     elapsedTime=0;
 }      
            
+
+
+
+
+///////////////////////////////공격패턴 2
+
+public void MakeFireBall()
+{
+    GameObject fireball=GameObject.Instantiate(fireBall,fireBallTransform.position,Quaternion.identity);
+
+    MoveAndScaleFireBall();
+    Invoke("ChasePlayer",2f);
+}
+
+private void MoveAndScaleFireBall()
+{
+    fireBall.transform.DOMoveY(fireBall.transform.position.y+10f,2f);
+    fireBall.transform.DOScale(Vector3.one*0.02f,2f);
+}
+
 
 }

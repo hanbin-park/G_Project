@@ -13,7 +13,8 @@ public class Boss_Attack2 : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        boss= animator.GetComponent<Boss>();
-    boss.BossLookMethod();
+        boss.BossLookMethod();
+        boss.MakeFireBall();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

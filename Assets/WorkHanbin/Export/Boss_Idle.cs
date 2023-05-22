@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class Boss_Idle : StateMachineBehaviour
 {
     enum state {pattern1,pattern2,pattern3};

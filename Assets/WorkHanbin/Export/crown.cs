@@ -5,6 +5,8 @@ using UnityEngine;
 public class crown : MonoBehaviour
 {
     float y ;
+    public float speed=4f;
+    public float addPos=1.3f;
     void Start()
     {
         
@@ -13,7 +15,8 @@ public class crown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        y= Time.deltaTime;
-        gameObject.transform.position= new Vector3(0,Mathf.Cos(y)*0.1f,0);
+        y= Mathf.Sin(Time.time*speed)*0.1f+addPos ;
+
+        gameObject.transform.localPosition= new Vector3(transform.localPosition.x,y,transform.localPosition.z);
     }
 }
