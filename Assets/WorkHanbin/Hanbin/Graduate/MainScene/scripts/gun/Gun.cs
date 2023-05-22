@@ -103,7 +103,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void rayshoot(Vector3 monsterPos )
+    public virtual void rayshoot(Vector3 monsterPos )
     {
         Vector3 screenPosition = playerCamera.WorldToScreenPoint(monsterPos);
         Ray ray = playerCamera.ScreenPointToRay(screenPosition);
