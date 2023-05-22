@@ -124,10 +124,12 @@ public class Player : MonoBehaviour
                 
                 getGun.Play();
 
-                HPImage[0].SetActive(true);
-                HPImage[1].SetActive(true);
-                HPImage[2].SetActive(true);
-                UserUi.SetActive(true);
+                for(int i = 0; i < hp; i++)
+                {
+                    HPImage[i].SetActive(true);
+                    
+                }
+                    UserUi.SetActive(true);
 
                 timeline1.SetActive(true);
                 Destroy(nearOjbect);//집은 무기는 삭제
@@ -161,7 +163,6 @@ public class Player : MonoBehaviour
                     {
                         GameManager.Instance.NextStage();
                     }
-
                 }
 
                 UpdateLifeIcon(hp);
