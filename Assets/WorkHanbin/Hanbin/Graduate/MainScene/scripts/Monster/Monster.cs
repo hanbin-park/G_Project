@@ -5,7 +5,6 @@ using UnityEngine;
 public class Monster : MonoBehaviour, IDamageable
 {
 
-
 public bool isDead = false;
 
 AudioSource [] audios ;
@@ -247,14 +246,17 @@ public float waitTime=1;
                 //원자로 쉴드 스테이지
                 if(other.tag=="Energy")
                 {
-                    //원자로 쉴드 피통은 나의 피통과 같다
+                    //원자로 피통은 나의 피통과 같다
+                    
                     GameObject.Find("cineCamera").GetComponent<Player>().hp--;
                     GameObject.Find("cineCamera").GetComponent<Player>().UpdateLifeIcon(GameObject.Find("cineCamera").GetComponent<Player>().hp);
+                    GameObject.Find("cineCamera").GetComponent<Player>().HitAmmor();
 
                     if(GameObject.Find("cineCamera").GetComponent<Player>().hp==0)
                     {
                         GameObject.Find("cineCamera").GetComponent<Player>().EndScene();
                     }
+                    
 
                     GameManager.Instance.monsterCount -= 1;
                     if(GameManager.Instance.monsterCount == 0)

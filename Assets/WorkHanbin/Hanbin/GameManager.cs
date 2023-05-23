@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
             }
             return instance;
         }
-
     }
+    
     public int stage = 0;
     
     public GameObject[] cameras;

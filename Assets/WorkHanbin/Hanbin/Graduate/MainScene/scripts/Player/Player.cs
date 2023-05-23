@@ -157,7 +157,6 @@ public class Player : MonoBehaviour
     if (other.tag == "Monster")
             {
                 hp--;
-
                 //몬스터 충돌 1회 공격 후 삭제
                 if(other.name != "Boss_RED")
                 {
@@ -234,6 +233,9 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene("EndScene");
     }
 
-
+    public void HitAmmor()
+    {
+        HitUI.SetActive(true);
+    }
 
 }
