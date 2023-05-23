@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int maxhp=3;
-    private int hp;
+    public int hp;
 
     public float score=0;
 
@@ -224,7 +224,7 @@ public class Player : MonoBehaviour
 
     }
 
-     void EndScene()
+    public void EndScene()
     {
         Cursor.visible = true;
         SceneManager.LoadScene("EndScene");

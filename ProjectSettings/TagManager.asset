@@ -9,6 +9,7 @@ TagManager:
   - Destination
   - Clear
   - Bullet
+  - Energy
   layers:
   - Default
   - TransparentFX

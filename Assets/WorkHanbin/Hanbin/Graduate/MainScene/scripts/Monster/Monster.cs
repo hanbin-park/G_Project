@@ -243,6 +243,26 @@ public float waitTime=1;
                     other.gameObject.SetActive(false);
                     IsCrossAwayMonster = false;
                 }
+
+                //원자로 쉴드 스테이지
+                if(other.tag=="Energy")
+                {
+                    //원자로 쉴드 피통은 나의 피통과 같다
+                    GameObject.Find("cineCamera").GetComponent<Player>().hp--;
+                    GameObject.Find("cineCamera").GetComponent<Player>().UpdateLifeIcon(GameObject.Find("cineCamera").GetComponent<Player>().hp);
+
+                    if(GameObject.Find("cineCamera").GetComponent<Player>().hp==0)
+                    {
+                        GameObject.Find("cineCamera").GetComponent<Player>().EndScene();
+                    }
+
+                    GameManager.Instance.monsterCount -= 1;
+                    if(GameManager.Instance.monsterCount == 0)
+                    {
+                        GameManager.Instance.NextStage();
+                    }
+                    Destroy(gameObject);
+                }
             }
     }
 
