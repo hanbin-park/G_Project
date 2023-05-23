@@ -95,6 +95,9 @@ public class Player : MonoBehaviour
         {
             if (nearOjbect.tag == "Weapon")//그게 무기이면
             {
+                if(equipWeapon == null)
+                    timeline1.SetActive(true);
+
                 Debug.Log("hit!!!!");
                 Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록
                 int weaponIndex = item.value;
@@ -131,7 +134,8 @@ public class Player : MonoBehaviour
                 }
                     UserUi.SetActive(true);
 
-                timeline1.SetActive(true);
+                
+
                 Destroy(nearOjbect);//집은 무기는 삭제
                 nearOjbect = null;
 
