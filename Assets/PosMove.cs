@@ -24,6 +24,6 @@ public class PosMove : MonoBehaviour
         runningTime += Time.deltaTime * speed;
         yPos = Mathf.Sin(runningTime)*k;
         xPos = Mathf.Cos(runningTime)*k;
-        this.transform.position = new Vector3(64-xPos,93+yPos,-93);
+        this.transform.position = new Vector3(64-xPos,93+yPos,-95);
     }
 }

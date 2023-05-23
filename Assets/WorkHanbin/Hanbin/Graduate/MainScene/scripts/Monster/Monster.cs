@@ -305,9 +305,9 @@ IEnumerator changeState()
             
             monsterAttack.Play();
 
-            float ran=UnityEngine.Random.Range(-10,-7);
+            //float ran=UnityEngine.Random.Range(-10,-7);
             GameObject instance = Instantiate(bullet, bulletPos.position, Quaternion.identity);
-            instance.GetComponent<Rigidbody>().velocity= new Vector3(0,1,ran).normalized*1;
+            instance.GetComponent<Rigidbody>().velocity= new Vector3(0,0,0).normalized*1;
         }
     }
 }
