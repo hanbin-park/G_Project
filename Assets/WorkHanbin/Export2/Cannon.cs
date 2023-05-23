@@ -1,83 +1,105 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    public GameObject reloadUI;
+
+    // 장전해주세요 UI
+
 
     public Camera playerCamera;
 
-    public GunUI gunUI;
+    public CannonUI gunUI;
+    public GameObject gunUIObject;
 
     private GameObject targetMonster;
     AudioSource shootSound;
     public float sensitivity = 2;
-
+    float timeSinceLastShot;
 
     [Header("Info")]
     public new string name = "gun";
     public LayerMask targetLayer;
 
     [Header("Shooting")]
-    public int damage = 1000;
+    public int damage = 40;
 
 
+    [Header("Reloading")]
+    public int currentAmmo = 10;
+    public int magSize = 10;
+    public float fireRate = 600;
+    public float reloadTime;
 
-
-    private void Start() {
-        playerCamera= GameObject.Find("cineCamera").GetComponent<Camera>();
-    }
-
-
-
-
-
-
+    [HideInInspector]
+    public bool reloading;
 
     [HideInInspector]
     public bool IsMonsterInCrossHead;
     //CrossHead 안쪽에 부딪혔을때
     public Transform parentTransform;
     public Vector3 MonsterPos;
+
+
+
+    private int count = 2;
+
+
     private void OnEnable()
     {
-
-        gunUI = GetComponent<GunUI>();
+        count = 2;
+        gunUI = GetComponent<CannonUI>();
         shootSound = GetComponent<AudioSource>();
-        PlayerShoot.shootInput += Shoot;  
+        //PlayerShoot.shootInput += Shoot;
+
         parentTransform = transform.parent;
     }
 
     private void Update()
     {
-
+        timeSinceLastShot += Time.deltaTime;
         GunMove();
-
+        
         // Debug.DrawRay(ray.origin, ray.direction * 20, Color.black, 10);
 
     }
 
 
 
+    private bool CanShoot() => !reloading && timeSinceLastShot > 1f / (fireRate / 60f);
 
-    private void Shoot()
+
+
+    public void Shoot()
     {
 
-
-        if (!IsMonsterInCrossHead)
         {
-            rayshoot();
-        }
-        if (IsMonsterInCrossHead)
-        {
+            
 
-            rayshoot(MonsterPos);
+
+
+                    shootSound.Play();
+
+
+                    if (!IsMonsterInCrossHead)
+                    {
+                        rayshoot();
+                    }
+                    if (IsMonsterInCrossHead)
+                    {
+
+                        rayshoot(MonsterPos);
+                    }
+
+                
+
+            
+
+
         }
     }
-
-
-
 
     public virtual void rayshoot(Vector3 monsterPos)
     {
@@ -99,9 +121,20 @@ public class Cannon : MonoBehaviour
             else if (hit.collider.tag == "Bullet")
             {
                 Destroy(hit.collider.gameObject);
+
+                count--;
+                if(count==0)
+                {
+                    var player= GameObject.Find("cineCamera").GetComponent<Player>();
+                    player.DropWeapon();
+                    
+
+                }
             }
         }
 
+        currentAmmo--;
+        timeSinceLastShot = 0;
 
     }
 
@@ -135,6 +168,9 @@ public class Cannon : MonoBehaviour
             }
         }
 
+        currentAmmo--;
+        timeSinceLastShot = 0;
+
     }
 
 
@@ -143,7 +179,7 @@ public class Cannon : MonoBehaviour
     {
 
         PlayerShoot.shootInput -= Shoot;
-      
+
     }
 
 
@@ -170,12 +206,17 @@ public class Cannon : MonoBehaviour
 
     }
 
-   
+
 
     public AudioSource reloadGun;
 
-   
 
+
+    private IEnumerator DeactivateMuzzleFlash(GameObject instance, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        instance.SetActive(false);
+    }
 
 
 }

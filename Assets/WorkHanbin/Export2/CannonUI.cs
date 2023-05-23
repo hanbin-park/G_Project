@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class CannonUI : MonoBehaviour
 {
-  
+
 
     public Camera playerCamera;
     public GameObject crossHead;
@@ -16,49 +16,72 @@ public class CannonUI : MonoBehaviour
     public Sprite crossHeadCheckedImage;
 
 
-public float boxdistance= 1.0f;
+    public float boxdistance = 1.0f;
 
     public GameObject Gun;
-    
-    private Gun gun;
+
+    private Cannon gun;
     private RectTransform crossHeadRect;
     public GameObject[] ammoUI;
     public GameObject targetGun;
 
     public LayerMask targetLayer;
-    Gun gunInfo;
+    Cannon gunInfo;
     int currentAmmo;
+    private Image image;
 
-void Awake()
+
+
+
+
+    public Image gaugeFillImage; // 게이지를 표시할 Image 컴포넌트
+    public GameObject gaugeUI; // 게이지 UI 오브젝트
+
+    private bool isMouseDown = false; // 마우스 버튼이 눌렸는지 여부
+    private float holdDuration = 0f; // 버튼을 누른 지속 시간
+
+    private float maxHoldDuration = 3f; // 게이지가 가득 차는 시간
+
+    private Color originalColor; // 원래의 이미지 색상
+
+
+    private bool isPlayingSound = false;
+    public AudioSource gaugeUpSound;
+
+    void Awake()
     {
-        autoTargetedMonsterUI=GetComponent<AutoTargetedMonsterUI>();
-        gun= Gun.GetComponent<Gun>();
-        crossHeadImageComp=crossHead.GetComponent<Image>();
+        autoTargetedMonsterUI = GetComponent<AutoTargetedMonsterUI>();
+        gun = Gun.GetComponent<Cannon>();
+        crossHeadImageComp = crossHead.GetComponent<Image>();
         Cursor.visible = false;
-        crossHeadRect=crossHead.GetComponent<RectTransform>();
-        gunInfo = targetGun.GetComponent<Gun>();
+        crossHeadRect = crossHead.GetComponent<RectTransform>();
+        gunInfo = targetGun.GetComponent<Cannon>();
         currentAmmo = gunInfo.currentAmmo;
+        originalColor = gaugeFillImage.color; // 원래의 이미지 색상 저장
+        gaugeUI.SetActive(false); // 게이지 UI 초기에 비활성화
     }
 
 
 
 
 
-    private Image image;
+
     // Start is called before the first frame update
     void Start()
     {
-        image= GetComponent<Image>();
-        image.DOFade(1,1);
+        image = GetComponent<Image>();
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 mousePos = Input.mousePosition;
-
         ChangeUI(mousePos);
-        Ammo();
+
+        Guage();
+
     }
 
 
@@ -66,60 +89,93 @@ void Awake()
     {
         Ray ray = playerCamera.ScreenPointToRay(mousePos);
         RaycastHit hitInfo;
-        bool isDetected = Physics.BoxCast(ray.origin, new Vector3(boxdistance,boxdistance,boxdistance), ray.direction, out hitInfo, Quaternion.identity, Mathf.Infinity, targetLayer);
+        bool isDetected = Physics.BoxCast(ray.origin, new Vector3(boxdistance, boxdistance, boxdistance), ray.direction, out hitInfo, Quaternion.identity, Mathf.Infinity, targetLayer);
 
-        bool isDefaultLayer = (hitInfo.collider is not null) && (hitInfo.collider.gameObject.layer == 0);
+        bool isDefaultLayer = (hitInfo.collider is not null) && (hitInfo.collider.gameObject.layer == targetLayer);
         //Debug.Log(isDefaultLayer);
         if (!isDefaultLayer && isDetected)
         {
-            
-            
-            gunInfo.IsMonsterInCrossHead=true;
-            crossHeadImageComp.sprite = crossHeadCheckedImage;
-          
-           gunInfo.MonsterPos=hitInfo.collider.gameObject.transform.position;
-  
-           autoTargetedMonsterUI.targetedMonster  =hitInfo.collider.gameObject.transform;
 
-     
+            Debug.Log("checked!");
+            gunInfo.IsMonsterInCrossHead = true;
+            crossHeadImageComp.sprite = crossHeadCheckedImage;
+
+            gunInfo.MonsterPos = hitInfo.collider.gameObject.transform.position;
+
+            autoTargetedMonsterUI.targetedMonster = hitInfo.collider.gameObject.transform;
+
+
         }
         else
         {
-            gunInfo.IsMonsterInCrossHead=false;
+            gunInfo.IsMonsterInCrossHead = false;
             crossHeadImageComp.sprite = crossHeadImage;
-            autoTargetedMonsterUI.targetedMonster=null;
+            autoTargetedMonsterUI.targetedMonster = null;
         }
 
         crossHeadRect.position = mousePos;
     }
 
-    private void Ammo()
+
+
+
+
+
+    void Guage()
     {
-        if (currentAmmo != gunInfo.currentAmmo)
+
+        if (Input.GetMouseButtonDown(0))
         {
-            UpdateAmmoUI(gunInfo.currentAmmo);
-            currentAmmo = gunInfo.currentAmmo;
+            isMouseDown = true;
+            holdDuration = 0f;
+            gaugeUI.SetActive(true); // 마우스 버튼을 누를 때 게이지 UI 활성화
+            PlaySound();
         }
-    }
 
-    void UpdateAmmoUI(int amm)
-    {
-
+        if (isMouseDown)
         {
-            for (int i = 0; i < ammoUI.Length; i++)
-            {
+            holdDuration += Time.deltaTime;
 
-                if (i < gunInfo.currentAmmo)
-                    ammoUI[i].SetActive(true);
-                else
-                    ammoUI[i].SetActive(false);
+            // 게이지가 가득 찼을 때 특정 행동 수행
+            if (holdDuration >= maxHoldDuration)
+            {
+                gaugeFillImage.color = Color.green;
+                if (Input.GetMouseButtonUp(0))
+                {
+                    gunInfo.Shoot();
+                    StopSound();
+                }
             }
 
+            // 게이지 채우기
+            float fillAmount = holdDuration / maxHoldDuration;
+            gaugeFillImage.fillAmount = fillAmount;
         }
 
-
+        if (Input.GetMouseButtonUp(0))
+        {
+            isMouseDown = false;
+            gaugeFillImage.color = originalColor;
+            gaugeUI.SetActive(false); // 마우스 버튼을 뗄 때 게이지 UI 비활성화
+            StopSound();
+        }
     }
 
+    private void StopSound()
+    {
+        if (isPlayingSound)
+        {
+            gaugeUpSound.Stop();
+            isPlayingSound = false;
+        }
+    }
+    private void PlaySound()
+    {
+        if (!isPlayingSound)
+        {
+            gaugeUpSound.Play();
+            isPlayingSound = true;
+        }
+    }
 
-    
 }
