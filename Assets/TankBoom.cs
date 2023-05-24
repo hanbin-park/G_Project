@@ -4,40 +4,18 @@ using UnityEngine;
 
 public class TankBoom : MonoBehaviour
 {
-    public ParticleSystem particleObject1;
-    public ParticleSystem particleObject2;
-    public ParticleSystem particleObject3;
-    public ParticleSystem particleObject4;
-    public ParticleSystem particleObject5;
+    public GameObject TimeLineBoom;
+
+    public GameObject WithTank;
+
+    public GameObject scoreUI;
 
     public void Boom()
     {
-        Invoke("SoundPlay1",0.1f);
-        Invoke("SoundPlay2",0.1f);
-        Invoke("SoundPlay3",0.1f);
-        Invoke("SoundPlay4",0.1f);
-        Invoke("SoundPlay5",0.1f);
-    }
-
-    void SoundPlay1()
-    {
-        particleObject1.Play();
-    }
-    void SoundPlay2()
-    {
-        particleObject1.Play();
-    }
-    void SoundPlay3()
-    {
-        particleObject1.Play();
-    }
-    void SoundPlay4()
-    {
-        particleObject1.Play();
-    }
-    void SoundPlay5()
-    {
-        particleObject1.Play();
+        ScoreManager.Instance.score += 500;
+        scoreUI.GetComponent<Score>().IncreaseScore();
+        Destroy(WithTank);
+        TimeLineBoom.SetActive(true);
     }
 
 }

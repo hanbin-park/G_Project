@@ -100,6 +100,10 @@ public class Player : MonoBehaviour
             {
                 if(equipWeapon == null)
                     timeline1.SetActive(true);
+                if(nearOjbect.name == "Cannon")
+                {
+                    GameManager.Instance.NextStage();
+                }
 
                 Debug.Log("hit!!!!");
                 Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록

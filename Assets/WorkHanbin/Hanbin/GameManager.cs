@@ -55,15 +55,17 @@ public class GameManager : MonoBehaviour
     
     public void NextStage()
     {
+
         GameObject[] monsterBullet = GameObject.FindGameObjectsWithTag("Bullet");
         for (int i = 0; i < monsterBullet.Length; i++)
         {
-            Destroy(monsterBullet[i]);
+                Destroy(monsterBullet[i]);
+
         }
         cameras[GameManager.Instance.stage+1].SetActive(true);
         GameManager.Instance.stage++;
 
-        if(GameManager.Instance.stage == 20)
+        if(GameManager.Instance.stage == 22)
         {
             Cursor.visible = true;
             SceneManager.LoadScene("EndScene");

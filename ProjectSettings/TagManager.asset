@@ -10,6 +10,7 @@ TagManager:
   - Clear
   - Bullet
   - Energy
+  - Tank
   layers:
   - Default
   - TransparentFX

@@ -131,6 +131,24 @@ public class Cannon : MonoBehaviour
 
                 }
             }
+            else if(hit.collider.tag =="Tank")
+            {
+
+                    TankBoom t = hit.transform.GetComponent<TankBoom>();
+                    t?.Boom();
+
+                
+                Destroy(hit.collider.gameObject);
+                count--;
+                if(count==0)
+                {
+                    var player= GameObject.Find("cineCamera").GetComponent<Player>();
+                    player.DropWeapon();
+                    
+
+                }
+                GameManager.Instance.stage ++;
+            }
         }
 
         currentAmmo--;

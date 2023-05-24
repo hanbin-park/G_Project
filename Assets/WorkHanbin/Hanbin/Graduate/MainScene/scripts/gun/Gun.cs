@@ -154,13 +154,7 @@ public class Gun : MonoBehaviour
                 damageable?.Damage(damage);
             }
             else if(hit.collider.tag =="Bullet")
-            {
-                if(hit.transform.name == "Tank1" || hit.transform.name == "Tank2" || hit.transform.name == "Tank3" || hit.transform.name == "Tank4")
-                {
-                    TankBoom t = hit.transform.GetComponent<TankBoom>();
-                    t?.Boom();
-                }
-                
+            {   
                 Destroy(hit.collider.gameObject);
             }
         }
