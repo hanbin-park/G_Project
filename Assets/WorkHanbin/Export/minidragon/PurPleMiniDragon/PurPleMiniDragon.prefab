@@ -194,7 +194,7 @@ MonoBehaviour:
   attackRange: 30
   attackPeriod: 3
   m_anim: {fileID: 0}
-  health: 100
+  health: 50
   fadeTime: 1
   dieDelayTime: 1
   monsterScore: 10

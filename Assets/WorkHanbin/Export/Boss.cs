@@ -20,6 +20,7 @@ public class Boss : Monster
             if(haveWaitTime&&plz)
             {
                 bossHPUI.UION=true;
+                bossAnim.SetTrigger("Intro");
                 plz=false;
             }
         }
@@ -53,6 +54,8 @@ public Animator bossAnim;
 
 
     private BossHPUI bossHPUI;
+
+
 
 
 
@@ -337,5 +340,16 @@ private void MoveAndScaleFireBall()
     fireBall.transform.DOScale(Vector3.one*0.02f,2f);
 }
 
+
+
+
+
+/////////////////////////////////////보스패턴 3///////////////////////
+
+[Header("보스패턴3")]
+
+public Transform WeaponPos;
+public GameObject giveDropWeapon ;
+public bool giveweapon = false;
 
 }

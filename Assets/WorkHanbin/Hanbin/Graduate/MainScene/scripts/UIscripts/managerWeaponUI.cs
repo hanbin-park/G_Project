@@ -26,6 +26,7 @@ public class managerWeaponUI : MonoBehaviour
     {
         objPlayer=GameObject.FindGameObjectWithTag("Player");
         uiUse = Instantiate(prefabUI, FindObjectOfType<Canvas>().transform).GetComponent<Image>();
+        mainCamera=GameObject.Find("cineCamera").GetComponent<Camera>();
     }
     void Start()
     {
