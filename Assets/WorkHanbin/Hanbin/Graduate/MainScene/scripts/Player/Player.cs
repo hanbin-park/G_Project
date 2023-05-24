@@ -233,12 +233,25 @@ public class Player : MonoBehaviour
     public void EndScene()
     {
         Cursor.visible = true;
-        SceneManager.LoadScene("EndScene");
+        SceneManager.LoadScene("EndScene2");
     }
 
     public void HitAmmor()
     {
         HitUI.SetActive(true);
+    }
+
+    public void DropWeapon()
+    {
+        for(int i=0;i<4;i++)
+        {
+        weaponUI[i].SetActive(false);
+        hasWeapon[i]=false;
+        weapons[i].SetActive(false);
+        Cursor.visible=true;
+
+        }
+
     }
 
 }

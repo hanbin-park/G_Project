@@ -45,7 +45,7 @@ public float waitTime=1;
     public float fadeTime = 1.0f;
     public float dieDelayTime = 1.0f;
 
-    public float monsterScore = 10;
+    public int monsterScore = 10;
 
     public float moveSpeed = 1;
 

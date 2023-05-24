@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum Type{Hand,Pistol,MachineGun,Granade};
+    public enum Type{Hand,Pistol,MachineGun,Cannon};
     public Type type;
     public int value;
     public int rotateSpeed;
@@ -17,6 +17,13 @@ public class Item : MonoBehaviour
 
     private void Update() 
     {
-        transform.Rotate(Vector3.up*rotateSpeed*Time.deltaTime);
+        if (value == 3)
+        {
+                transform.Rotate(Vector3.forward * rotateSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+        }
     }
 }
