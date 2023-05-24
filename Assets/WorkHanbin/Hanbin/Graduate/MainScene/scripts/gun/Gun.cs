@@ -133,8 +133,6 @@ public class Gun : MonoBehaviour
 
 
 
-
-
     protected virtual void rayshoot()
     {
         // 마우스 클릭 지점의 좌표를 구합니다.
@@ -157,6 +155,12 @@ public class Gun : MonoBehaviour
             }
             else if(hit.collider.tag =="Bullet")
             {
+                if(hit.transform.name == "Tank1" || hit.transform.name == "Tank2" || hit.transform.name == "Tank3" || hit.transform.name == "Tank4")
+                {
+                    TankBoom t = hit.transform.GetComponent<TankBoom>();
+                    t?.Boom();
+                }
+                
                 Destroy(hit.collider.gameObject);
             }
         }
@@ -165,7 +169,6 @@ public class Gun : MonoBehaviour
         timeSinceLastShot = 0;
 
     }
-
 
 
     private void OnDisable()

@@ -41,4 +41,10 @@ public class ScoreManager : MonoBehaviour
     }
 
     public float score = 0;
+
+    public void ScoreAdd()
+    {
+        
+    }
+
 }

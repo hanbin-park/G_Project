@@ -70,6 +70,7 @@ public float waitTime=1;
 
     private void Awake()
     {
+        MscoreUI = GameObject.Find("Score");
         bulletPos = transform.Find("bulletPos");
         thisPos=GetComponent<Transform>().position;
         rigid = GetComponent<Rigidbody>();
@@ -228,7 +229,8 @@ IncreaseScore
         }*/
         
         ScoreManager.Instance.score += monsterScore;
-        MscoreUI = GameObject.Find("Score");
+
+        
         MscoreUI.GetComponent<Score>().IncreaseScore();
 
         Destroy(gameObject);
