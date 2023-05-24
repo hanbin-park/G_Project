@@ -5,6 +5,8 @@ using UnityEngine;
 public class Monster : MonoBehaviour, IDamageable
 {
 
+public GameObject MscoreUI;
+
 public bool isDead = false;
 
 AudioSource [] audios ;
@@ -45,7 +47,6 @@ public float waitTime=1;
 
     public float monsterScore = 10;
 
-    Score scoreUI;
     public float moveSpeed = 1;
 
 
@@ -56,13 +57,14 @@ public float waitTime=1;
     BoxCollider boxCollider;
     Material mat;
 
+
     private void Start()
     {
 //change
        targetplayer = GameObject.Find("cineCamera");
        //
         m_anim = gameObject.GetComponent<Animator>();
-        scoreUI = FindObjectOfType<Score>();
+
     }
 
 
@@ -73,7 +75,6 @@ public float waitTime=1;
         rigid = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<SkinnedMeshRenderer>().material;
-
         
     }
     void Update()
@@ -219,13 +220,17 @@ public float waitTime=1;
         /*while (Time.time < startTime + fadeTime)
         {
             float t = (Time.time - startTime) / fadeTime;
-
+IncreaseScore
             Color c = transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.color;
 
             c.a = Mathf.Lerp(1.0f, 0.0f, t);
             yield return null;
         }*/
         
+        ScoreManager.Instance.score += monsterScore;
+        MscoreUI = GameObject.Find("Score");
+        MscoreUI.GetComponent<Score>().IncreaseScore();
+
         Destroy(gameObject);
     }
 

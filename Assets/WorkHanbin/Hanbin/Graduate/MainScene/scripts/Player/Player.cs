@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public GameObject scoreUI;
+
     public GameObject[] HPImage;
 
     public GameObject UserUi;
@@ -46,7 +48,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         hp=maxhp;
-  PlayerShoot.shootInput += ShootRay;
+        PlayerShoot.shootInput += ShootRay;
+
     }
 
     // Update is called once per frame
@@ -127,14 +130,14 @@ public class Player : MonoBehaviour
                 
                 getGun.Play();
 
+
                 for(int i = 0; i < hp; i++)
                 {
                     HPImage[i].SetActive(true);
                     
                 }
-                    UserUi.SetActive(true);
-
-                
+                UserUi.SetActive(true);
+                scoreUI.SetActive(true);
 
                 Destroy(nearOjbect);//집은 무기는 삭제
                 nearOjbect = null;

@@ -6,10 +6,6 @@ using UnityEngine.SceneManagement;
 public class ScoreManager : MonoBehaviour
 {
     private static ScoreManager instance = null; //
-    void Start()
-    {
-        
-    }
     void Awake()
     {
         if (null == instance)
@@ -22,6 +18,7 @@ public class ScoreManager : MonoBehaviour
             //나는 헷갈림 방지를 위해 this를 붙여주기도 한다.
             DontDestroyOnLoad(this.gameObject);
         }
+
         else
         {
             //만약 씬 이동이 되었는데 그 씬에도 Hierarchy에 GameMgr이 존재할 수도 있다.
@@ -31,8 +28,17 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    void Update()
+    public static ScoreManager Instance // 예시) if(GameManager.Instance.monsterCount == 0){ GameManager.Instance.NextStage(GameManager.Instance.stage) }
     {
-        
+        get
+        {
+            if (null == instance)
+            {
+                return null;
+            }
+            return instance;
+        }
     }
+
+    public float score = 0;
 }

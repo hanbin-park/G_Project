@@ -6,17 +6,9 @@ using TMPro;
 public class Score : MonoBehaviour
 {
 
-
-
-   int scoreInt;
     TMP_Text textScore;
-    public  float score =0;
-     
-    
+       
     public static int getScore = 0;    
-
-
-
 
      private void Awake() 
     {
@@ -31,22 +23,13 @@ public class Score : MonoBehaviour
     void Start()
     {
         textScore=GetComponent<TMP_Text>();
-      textScore.text="0";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-     
+        textScore.text="점수: "+ ScoreManager.Instance.score;
     }
 
 
-   public void IncreaseScore(float killscore)
+   public void IncreaseScore()
     {
-        this.score +=killscore;
-         scoreInt= (int)this.score;
-        textScore.text= scoreInt.ToString();
-        GameManager.Instance.playerScore+=killscore;
+        textScore.text= "점수: " + ScoreManager.Instance.score;
     }
 
 }
