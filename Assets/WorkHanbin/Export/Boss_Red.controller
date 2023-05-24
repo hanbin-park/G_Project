@@ -275,7 +275,7 @@ AnimatorStateMachine:
     m_Position: {x: 210, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -791874726031396388}
-    m_Position: {x: 480, y: 210, z: 0}
+    m_Position: {x: 480, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9010001442591095067}
     m_Position: {x: -390, y: 0, z: 0}
@@ -388,7 +388,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Boss_Attack3
-  m_Speed: 1
+  m_Speed: 0.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1853499129003398369}

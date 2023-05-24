@@ -40,7 +40,10 @@ public class Boss_Idle : StateMachineBehaviour
         }
 
       
-
+        if(bosss.isAttacked==true)
+       {
+        bosss.ShowWeakPoint();
+       }
 
 
 

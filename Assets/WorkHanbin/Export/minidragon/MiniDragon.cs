@@ -109,7 +109,7 @@ private bool isReady = false;
    if(Boss_Attack1.monsterCount==0)
    {
     bossScript.patternOn=true;
-    Boss_Attack1.monsterCount=3;
+    Boss_Attack1.monsterCount=9;
    } 
   }
 }

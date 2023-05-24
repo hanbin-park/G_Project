@@ -131,6 +131,25 @@ public class Cannon : MonoBehaviour
 
                 }
             }
+///////////////////////////////////////////추가내용
+            else if(hit.collider.tag=="WeakPoint")
+            {
+                var boss= hit.collider.gameObject.GetComponentInParent<Boss>();
+                if(hit.collider.name=="weakPoint3")
+                {
+                boss.Damage(3000);
+                }
+                boss.Damage(300);
+                boss.isAttacked=true;
+                count--;
+                if(count==-1)
+                {var player= GameObject.Find("cineCamera").GetComponent<Player>();
+                    player.DropWeapon();
+
+                }
+                hit.collider.gameObject.SetActive(false);
+            }
+
         }
 
         currentAmmo--;
