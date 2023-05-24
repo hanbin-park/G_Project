@@ -35,8 +35,14 @@ public class EndScene : MonoBehaviour
     public int middle;
     public int high;
 
+
+
+    
+
+
     private void Start()
     {
+       
         int startValue = 0;
 
         DOTween.To(() => startValue, x => startValue = x, targetValue, duration)

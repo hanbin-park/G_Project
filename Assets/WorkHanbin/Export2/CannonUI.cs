@@ -40,7 +40,7 @@ public class CannonUI : MonoBehaviour
     private bool isMouseDown = false; // 마우스 버튼이 눌렸는지 여부
     private float holdDuration = 0f; // 버튼을 누른 지속 시간
 
-    private float maxHoldDuration = 3f; // 게이지가 가득 차는 시간
+    public float maxHoldDuration = 3f; // 게이지가 가득 차는 시간
 
     private Color originalColor; // 원래의 이미지 색상
 

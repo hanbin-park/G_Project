@@ -44,7 +44,7 @@ public class Cannon : MonoBehaviour
 
 
 
-    private int count = 2;
+    private int  count = 2;
 
 
     private void OnEnable()
