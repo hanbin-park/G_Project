@@ -146,12 +146,12 @@ public class Cannon : MonoBehaviour
             {
                 
                 //GetComponentInParent<Boss>();
-                if(hit.collider.name=="weakPoint3")
+                if(hit.collider.name=="WeakPoint3")
                 {
-                boss.Damage(3000);//원콤
+                    boss.Damage(3000);//원콤
                 }
                 boss.Damage(300);
-                boss.isAttacked=true;
+                boss.IsAttacked=true;
                 count--;
                 if(count==-1)
                 {var player= GameObject.Find("cineCamera").GetComponent<Player>();

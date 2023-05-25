@@ -99,7 +99,12 @@ public class Player : MonoBehaviour
             if (nearOjbect.tag == "Weapon")//그게 무기이면
             {
                 if(equipWeapon == null)
-                    timeline1.SetActive(true);
+                {
+                    if(nearOjbect.name == "dropPistol")
+                        {
+                            timeline1.SetActive(true);
+                        }
+                }
                 if(nearOjbect.name == "Cannon")
                 {
                     GameManager.Instance.NextStage();
@@ -109,7 +114,7 @@ public class Player : MonoBehaviour
                 Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록
                 int weaponIndex = item.value;
 
-                for(int index=0;index<hasWeapon.Length;index++)
+                for(int index=0;index<weapons.Length;index++)
                 {
                     weapons[index].SetActive(false);
                     hasWeapon[index] = false;

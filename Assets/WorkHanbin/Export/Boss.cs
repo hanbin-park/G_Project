@@ -216,7 +216,7 @@ override public  void Damage(int damage)
 
 
         bossHPUI.BossUI.SetActive(false);
-        GameManager.Instance.stage ++;
+        GameManager.Instance.NextStage();
         Destroy(gameObject);
     }
 
