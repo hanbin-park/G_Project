@@ -122,14 +122,6 @@ public class Cannon : MonoBehaviour
             {
                 Destroy(hit.collider.gameObject);
 
-                count--;
-                if(count==0)
-                {
-                    var player= GameObject.Find("cineCamera").GetComponent<Player>();
-                    player.DropWeapon();
-                    
-
-                }
             }
             else if(hit.collider.tag =="Tank")
             {

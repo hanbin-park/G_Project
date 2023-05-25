@@ -14,6 +14,7 @@ public class TankBoom : MonoBehaviour
     {
         ScoreManager.Instance.score += 500;
         scoreUI.GetComponent<Score>().IncreaseScore();
+        GameManager.Instance.monsterCount = 0;
         Destroy(WithTank);
         TimeLineBoom.SetActive(true);
     }
