@@ -11,6 +11,7 @@ TagManager:
   - Bullet
   - Energy
   - Tank
+  - WeakPoint
   layers:
   - Default
   - TransparentFX

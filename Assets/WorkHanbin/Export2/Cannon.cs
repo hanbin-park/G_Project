@@ -43,7 +43,7 @@ public class Cannon : MonoBehaviour
     public Vector3 MonsterPos;
 
 
-
+    public Boss boss;
     private int count = 2;
 
 
@@ -144,7 +144,8 @@ public class Cannon : MonoBehaviour
             }
             else if(hit.collider.tag=="WeakPoint")
             {
-                var boss= hit.collider.gameObject.GetComponentInParent<Boss>();
+                
+                //GetComponentInParent<Boss>();
                 if(hit.collider.name=="weakPoint3")
                 {
                 boss.Damage(3000);//원콤
