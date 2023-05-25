@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 
 
     public GameObject nearOjbect;
-    private GameObject equipWeapon;
+    public GameObject equipWeapon;
 
 
 
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
             if (nearOjbect.tag == "Weapon")//그게 무기이면
             {
                 if(equipWeapon == null)
-                    timeline1.SetActive(true);
+                    
 
                 Debug.Log("hit!!!!");
                 Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록
@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
 
                 for(int index=0;index<hasWeapon.Length;index++)
                 {
+                weapons[index].SetActive(false);
                 hasWeapon[index] = false;
                 weaponUI[index].SetActive(false);
                 }

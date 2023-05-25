@@ -112,7 +112,7 @@ private void Awake() {
 IEnumerator WaitBeIdle(int pattern)
 {if(pattern==1)
 {
-yield return new WaitForSeconds(2.5f);
+yield return new WaitForSeconds(1.5f);
  bossAnim.SetBool("Attack1",false);
 }
 else if(pattern==2)
