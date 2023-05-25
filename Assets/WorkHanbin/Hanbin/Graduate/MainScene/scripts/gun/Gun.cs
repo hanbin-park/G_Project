@@ -119,10 +119,15 @@ public class Gun : MonoBehaviour
 
                 IDamageable damageable = hit.transform.GetComponent<IDamageable>();
                 damageable?.Damage(damage);
+
+                ScoreManager.Instance.score += 10;
+                Score.Instance.IncreaseScore();
             }
             else if(hit.collider.tag =="Bullet")
             {
                 Destroy(hit.collider.gameObject);
+                ScoreManager.Instance.score += 10;
+                Score.Instance.IncreaseScore();
             }
         }
 

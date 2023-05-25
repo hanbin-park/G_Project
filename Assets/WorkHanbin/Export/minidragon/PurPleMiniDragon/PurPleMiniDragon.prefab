@@ -194,10 +194,10 @@ MonoBehaviour:
   attackRange: 30
   attackPeriod: 3
   m_anim: {fileID: 0}
-  health: 30
+  health: 50
   fadeTime: 1
   dieDelayTime: 1
-  monsterScore: 10
+  monsterScore: 700
   moveSpeed: 1
   targetLayer:
     serializedVersion: 2

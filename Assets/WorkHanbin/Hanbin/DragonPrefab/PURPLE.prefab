@@ -3323,10 +3323,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7873557482903348880}
+  - component: {fileID: 7696308362986635640}
   - component: {fileID: 7696308362986635641}
   - component: {fileID: 7696308362986635646}
   - component: {fileID: 7354288564347272233}
-  - component: {fileID: 7696308362986635640}
   - component: {fileID: 7696308362986635645}
   - component: {fileID: 7696308362986635644}
   - component: {fileID: 7696308362986635395}
@@ -3356,6 +3356,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 160.706, z: 0}
+--- !u!114 &7696308362986635640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354288564347272234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69e38c19c75626498f5b3cb00586680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MscoreUI: {fileID: 0}
+  isDead: 0
+  waitTime: 0
+  haveWaitTime: 0
+  IsCrossAwayMonster: 0
+  CrossingTime: 3
+  destination: {fileID: 0}
+  IslookingMonster: 1
+  IsComingMonster: 0
+  IsAttackMonster: 0
+  attackRange: 50
+  attackPeriod: 4
+  m_anim: {fileID: 0}
+  health: 50
+  fadeTime: 1
+  dieDelayTime: 1
+  monsterScore: 700
+  moveSpeed: 1
+  scoreDecreaseMonster: 1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  bullet: {fileID: 1038414283646486933, guid: c6bea75ce688e3f42b93b6f3af5c2fe3, type: 3}
+  monsterAttack: {fileID: 7696308362986635395}
+  monsterHit: {fileID: 7696308362986635644}
+  monsterDie: {fileID: 7696308362986635645}
 --- !u!95 &7696308362986635641
 Animator:
   serializedVersion: 5
@@ -3403,43 +3441,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.9
+  m_Radius: 1.1
   m_Center: {x: 0, y: 0, z: 0.3}
---- !u!114 &7696308362986635640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354288564347272234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d69e38c19c75626498f5b3cb00586680, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDead: 0
-  waitTime: 0
-  haveWaitTime: 0
-  IsCrossAwayMonster: 0
-  CrossingTime: 3
-  destination: {fileID: 0}
-  IslookingMonster: 1
-  IsComingMonster: 0
-  IsAttackMonster: 0
-  attackRange: 30
-  attackPeriod: 4
-  health: 30
-  fadeTime: 1
-  dieDelayTime: 1
-  monsterScore: 10
-  moveSpeed: 1
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  bullet: {fileID: 1038414283646486933, guid: c6bea75ce688e3f42b93b6f3af5c2fe3, type: 3}
-  monsterAttack: {fileID: 7696308362986635395}
-  monsterHit: {fileID: 7696308362986635644}
-  monsterDie: {fileID: 7696308362986635645}
 --- !u!82 &7696308362986635645
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3548,7 +3551,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d695609a48b10a9499269801f73dfa5c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.461
   m_Pitch: 1
   Loop: 0
   Mute: 0

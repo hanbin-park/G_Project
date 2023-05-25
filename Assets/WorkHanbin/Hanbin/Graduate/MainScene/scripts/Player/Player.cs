@@ -16,15 +16,15 @@ public class Player : MonoBehaviour
 
 
     [SerializeField]
-    private int maxhp=3;
+    private int maxhp = 3;
     public int hp;
 
-    public float score=0;
+    public float score = 0;
 
     [Header("Ingame요소들")]
-   
-   public Camera PlayerCamera;
-    
+
+    public Camera PlayerCamera;
+
 
     public GameObject[] weapons;//가지고있는 무기 구분
     ////////////////////////////////addition
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        hp=maxhp;
+        hp = maxhp;
         PlayerShoot.shootInput += ShootRay;
 
     }
@@ -56,13 +56,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         ShootRay();
-      
 
 
-      
+
+
     }
 
-   
+
 
     private void ShootRay()
     {
@@ -74,12 +74,12 @@ public class Player : MonoBehaviour
         // 레이캐스트를 쏩니다. 레이캐스트가 부딪힌 물체가 있으면 true를 반환합니다.
         if (Physics.Raycast(ray, out hit))
         {
-            
-           if(Input.GetMouseButtonDown(0))
-            {        
 
-                
-                if(hit.collider.gameObject.tag == "Weapon")
+            if (Input.GetMouseButtonDown(0))
+            {
+
+
+                if (hit.collider.gameObject.tag == "Weapon")
                     Interaction();
             }
 
@@ -98,141 +98,192 @@ public class Player : MonoBehaviour
         {
             if (nearOjbect.tag == "Weapon")//그게 무기이면
             {
-                if(equipWeapon == null)
+                if (equipWeapon == null)
                 {
-                    if(nearOjbect.name == "dropPistol")
-                        {
-                            timeline1.SetActive(true);
-                        }
+                    if (nearOjbect.name == "dropPistol")
+                    {
+                        timeline1.SetActive(true);
+                    }
                 }
-                if(nearOjbect.name == "Cannon")
+                if (nearOjbect.name == "Cannon")
                 {
                     GameManager.Instance.NextStage();
-                }
 
-                Debug.Log("hit!!!!");
-                Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록
-                int weaponIndex = item.value;
+                    Debug.Log("hit!!!!");
+                    Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록
+                    int weaponIndex = item.value;
 
-                for(int index=0;index<weapons.Length;index++)
-                {
-                    weapons[index].SetActive(false);
-                    hasWeapon[index] = false;
-                    weaponUI[index].SetActive(false);
-                }
+                    for (int index = 0; index < weapons.Length; index++)
+                    {
+                        weapons[index].SetActive(false);
+                        hasWeapon[index] = false;
+                        weaponUI[index].SetActive(false);
+                    }
 
-                //갖고있는 무기체크 후 그거에 맞는 UI on
-                hasWeapon[weaponIndex]= true;
-                weaponUI[weaponIndex].SetActive(true);
+                    //갖고있는 무기체크 후 그거에 맞는 UI on
+                    hasWeapon[weaponIndex] = true;
+                    weaponUI[weaponIndex].SetActive(true);
 
+                    if (equipWeapon != null)//이미 무기를 가지고있으면
+                        equipWeapon.SetActive(false);
 
-
-
-                if(equipWeapon!=null)//이미 무기를 가지고있으면
-                  equipWeapon.SetActive(false);
-
-                equipWeapon=weapons[weaponIndex];
-                equipWeapon.SetActive(true);
-                
-                
-                introTimeLine.SetActive(false);
-                
-                
-                getGun.Play();
+                    equipWeapon = weapons[weaponIndex];
+                    equipWeapon.SetActive(true);
 
 
-                for(int i = 0; i < hp; i++)
-                {
-                    HPImage[i].SetActive(true);
-                    
-                }
-                UserUi.SetActive(true);
-                scoreUI.SetActive(true);
+                    introTimeLine.SetActive(false);
 
-                Destroy(nearOjbect);//집은 무기는 삭제
-                nearOjbect = null;
 
-                if(bgm.isPlaying)
-                {
-                    return;
+                    getGun.Play();
+
+
+                    for (int i = 0; i < hp; i++)
+                    {
+                        HPImage[i].SetActive(true);
+
+                    }
+                    UserUi.SetActive(true);
+                    scoreUI.SetActive(true);
+
+                    Destroy(nearOjbect);//집은 무기는 삭제
+                    nearOjbect = null;
+
+                    if (bgm.isPlaying)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        bgm.Play();
+                    }
                 }
                 else
                 {
-                    bgm.Play();
-                }
-            }
-        }
-    }
-//add
+                    Debug.Log("hit!!!!");
+                    Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록
+                    int weaponIndex = item.value;
 
-    private void OnTriggerEnter(Collider other) 
-    {
-    if (other.tag == "Monster")
-            {
-                hp--;
-                //몬스터 충돌 1회 공격 후 삭제
-                if(other.name != "Boss_RED")
-                {
-                    Destroy(other.gameObject);
-                    GameManager.Instance.monsterCount -= 1;
-                    if(GameManager.Instance.monsterCount == 0)
+                    for (int index = 0; index < weapons.Length; index++)
                     {
-                        GameManager.Instance.NextStage();
+                        weapons[index].SetActive(false);
+                        hasWeapon[index] = false;
+                        weaponUI[index].SetActive(false);
+                    }
+
+                    //갖고있는 무기체크 후 그거에 맞는 UI on
+                    hasWeapon[weaponIndex] = true;
+                    weaponUI[weaponIndex].SetActive(true);
+
+
+
+
+                    if (equipWeapon != null)//이미 무기를 가지고있으면
+                        equipWeapon.SetActive(false);
+
+                    equipWeapon = weapons[weaponIndex];
+                    equipWeapon.SetActive(true);
+
+
+                    introTimeLine.SetActive(false);
+
+
+                    getGun.Play();
+
+
+                    for (int i = 0; i < hp; i++)
+                    {
+                        HPImage[i].SetActive(true);
+
+                    }
+                    UserUi.SetActive(true);
+                    scoreUI.SetActive(true);
+
+                    Destroy(nearOjbect);//집은 무기는 삭제
+                    nearOjbect = null;
+
+                    if (bgm.isPlaying)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        bgm.Play();
                     }
                 }
 
-                UpdateLifeIcon(hp);
-                if(hp==0)
-                {
-                    EndScene();
-                }
-                HitUI.SetActive(true);
+            }
+        }
+    }
+    //add
 
-            }
-            else if(other.tag == "Bullet")
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Monster")
+        {
+            hp--;
+            //몬스터 충돌 1회 공격 후 삭제
+            if (other.name != "Boss_RED")
             {
-                hp--;
-                UpdateLifeIcon(hp);
-                if(hp==0)
+                Destroy(other.gameObject);
+                GameManager.Instance.monsterCount -= 1;
+                if (GameManager.Instance.monsterCount == 0)
                 {
-                    EndScene();
+                    GameManager.Instance.NextStage();
                 }
-                HitUI.SetActive(true);
-            
             }
-        
+
+            UpdateLifeIcon(hp);
+            if (hp == 0)
+            {
+                EndScene();
+            }
+            HitUI.SetActive(true);
+
+        }
+        else if (other.tag == "Bullet")
+        {
+            hp--;
+            UpdateLifeIcon(hp);
+            if (hp == 0)
+            {
+                EndScene();
+            }
+            HitUI.SetActive(true);
+
+        }
+
     }
 
-//add
+    //add
 
     private void OnTriggerStay(Collider other)
     {
-       if (other.tag == "Weapon")
-       {
+        if (other.tag == "Weapon")
+        {
             nearOjbect = other.gameObject;
-       }
+        }
 
-    /*
-        Debug.Log(nearOjbect.name);
-    */   
+        /*
+            Debug.Log(nearOjbect.name);
+        */
     }
     private void OnTriggerExit(Collider other)//
     {
-        
+
         if (other.tag == "Weapon")
             nearOjbect = null;
-           
+
 
     }
 
     public void UpdateLifeIcon(int life)
     {
-        for(int index=0;index<3;index++)
+        for (int index = 0; index < 3; index++)
         {
             HPImage[index].SetActive(false);
         }
 
-        for(int index=0;index<life;index++)
+        for (int index = 0; index < life; index++)
         {
             HPImage[index].SetActive(true);
         }
@@ -253,12 +304,12 @@ public class Player : MonoBehaviour
 
     public void DropWeapon()
     {
-        for(int i=0;i<4;i++)
+        for (int i = 0; i < 4; i++)
         {
-        weaponUI[i].SetActive(false);
-        hasWeapon[i]=false;
-        weapons[i].SetActive(false);
-        Cursor.visible=true;
+            weaponUI[i].SetActive(false);
+            hasWeapon[i] = false;
+            weapons[i].SetActive(false);
+            Cursor.visible = true;
 
         }
 

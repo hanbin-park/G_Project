@@ -99,6 +99,9 @@ public class FireBall : MonoBehaviour, IDamageable
         }
         else if(hp<=0)
             {
+                 ScoreManager.Instance.score += 5000;
+        Score.Instance.IncreaseScore();
+
                 var BossScript = boss.GetComponent<Boss>();
             BossScript.patternOn=true;
             Destroy(this.gameObject);

@@ -128,7 +128,8 @@ public class Cannon : MonoBehaviour
 
                     TankBoom t = hit.transform.GetComponent<TankBoom>();
                     t?.Boom();
-
+            ScoreManager.Instance.score +=1000;
+            Score.Instance.IncreaseScore();
                 
                 Destroy(hit.collider.gameObject);
                 count--;
@@ -144,11 +145,12 @@ public class Cannon : MonoBehaviour
             }
             else if(hit.collider.tag=="WeakPoint")
             {
-                
+            ScoreManager.Instance.score += 1000;
+            Score.Instance.IncreaseScore();
                 //GetComponentInParent<Boss>();
                 if(hit.collider.name=="WeakPoint3")
                 {
-                    boss.Damage(3000);//원콤
+                    boss.Damage(4000);//원콤
                 }
                 boss.Damage(300);
                 boss.IsAttacked=true;

@@ -55,6 +55,27 @@ public float waitTime=1;
     BoxCollider boxCollider;
     Material mat;
 
+
+float decreaseTime = 0;
+    int dcreaseCount = 10;
+
+    void DecreaseScore()
+    {
+        if (monsterScore > 130)
+        {
+            decreaseTime += Time.deltaTime;
+            if (decreaseTime >= 0.5f)
+            {
+                decreaseTime = 0;
+                if (dcreaseCount > 0)
+                {
+                    dcreaseCount--;
+                    monsterScore -= 50;
+                }
+            }
+        }
+    }
+
     private void Start()
     {
 //change
@@ -77,7 +98,7 @@ public float waitTime=1;
     }
     void Update()
     {
-           
+           DecreaseScore();
     }
 
 
