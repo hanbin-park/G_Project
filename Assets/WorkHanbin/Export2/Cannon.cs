@@ -76,10 +76,6 @@ public class Cannon : MonoBehaviour
     {
 
         {
-            
-
-
-
                     shootSound.Play();
 
 
@@ -93,14 +89,12 @@ public class Cannon : MonoBehaviour
                         rayshoot(MonsterPos);
                     }
 
-                
-
-            
-
 
         }
     }
 
+    public AudioSource GunShotSoud;
+    public AudioClip ShotGun;
     public virtual void rayshoot(Vector3 monsterPos)
     {
         Vector3 screenPosition = playerCamera.WorldToScreenPoint(monsterPos);
@@ -137,6 +131,7 @@ public class Cannon : MonoBehaviour
                 {
                     var player= GameObject.Find("cineCamera").GetComponent<Player>();
                     count = 2;
+                    GunShotSoud.PlayOneShot(ShotGun);
                     player.DropWeapon();
                     
 
@@ -156,7 +151,9 @@ public class Cannon : MonoBehaviour
                 boss.IsAttacked=true;
                 count--;
                 if(count==-1)
-                {var player= GameObject.Find("cineCamera").GetComponent<Player>();
+                {
+                    var player= GameObject.Find("cineCamera").GetComponent<Player>();
+                    GunShotSoud.PlayOneShot(ShotGun);
                     player.DropWeapon();
 
                 }

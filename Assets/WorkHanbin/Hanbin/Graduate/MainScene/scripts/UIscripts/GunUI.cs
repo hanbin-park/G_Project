@@ -53,6 +53,7 @@ public class GunUI : MonoBehaviour
         Ammo();
     }
 
+
 private void ChangeUI(Vector3 mousePos)
     {
         Ray ray = playerCamera.ScreenPointToRay(mousePos);
@@ -61,6 +62,7 @@ private void ChangeUI(Vector3 mousePos)
 
         bool isDefaultLayer = (hitInfo.collider is not null) && (hitInfo.collider.gameObject.layer == 0);
         //Debug.Log(isDefaultLayer);
+
         if (!isDefaultLayer && isDetected)
         {
             
@@ -72,7 +74,6 @@ private void ChangeUI(Vector3 mousePos)
   
            autoTargetedMonsterUI.targetedMonster  =hitInfo.collider.gameObject.transform;
 
-     
         }
         else
         {
