@@ -229,10 +229,10 @@ IncreaseScore
         }*/
         
         ScoreManager.Instance.score += monsterScore;
-
+        Score.Instance.IncreaseScore();
         
-        MscoreUI.GetComponent<Score>().IncreaseScore();
-
+        //MscoreUI.GetComponent<Score>().IncreaseScore();
+        
         Destroy(gameObject);
     }
 

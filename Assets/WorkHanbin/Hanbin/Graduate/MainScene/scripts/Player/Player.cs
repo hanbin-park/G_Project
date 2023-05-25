@@ -111,8 +111,9 @@ public class Player : MonoBehaviour
 
                 for(int index=0;index<hasWeapon.Length;index++)
                 {
-                hasWeapon[index] = false;
-                weaponUI[index].SetActive(false);
+                    weapons[index].SetActive(false);
+                    hasWeapon[index] = false;
+                    weaponUI[index].SetActive(false);
                 }
 
                 //갖고있는 무기체크 후 그거에 맞는 UI on

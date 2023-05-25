@@ -63,14 +63,12 @@ public Animator bossAnim;
        player= GameObject.FindWithTag("Player");
         bossHPUI= GetComponent<BossHPUI>();
         //GetComponent<Animator>();
-        pattern = new int[10]; 
+       pattern = new int[5]; 
         pattern[0]=1;
         pattern[1]=2;
-        pattern[2]=3;
-        for(int i= 3;i<10;i++)
-        {
-            pattern[i]=Random.Range(1,3);
-        }
+        pattern[2]=1;
+        pattern[3]=2;
+        pattern[4]=3;
          
     }
 
@@ -113,7 +111,7 @@ private void Awake() {
 IEnumerator WaitBeIdle(int pattern)
 {if(pattern==1)
 {
-yield return new WaitForSeconds(2.5f);
+yield return new WaitForSeconds(1.5f);
  bossAnim.SetBool("Attack1",false);
 }
 else if(pattern==2)
@@ -123,7 +121,7 @@ bossAnim.SetBool("Attack2",false);
 }
 else if(pattern==3)
 {
-yield return new WaitForSeconds(2.5f);
+yield return new WaitForSeconds(0.5f);
 bossAnim.SetBool("Attack3",false);
 }
 }
@@ -335,6 +333,49 @@ private void MoveAndScaleFireBall()
 {
     fireBall.transform.DOMoveY(fireBall.transform.position.y+10f,2f);
     fireBall.transform.DOScale(Vector3.one*0.02f,2f);
+}
+
+public GameObject cannonWeapon;
+
+
+public  bool isAttacked=false;
+
+public bool IsAttacked
+{
+get
+{
+    return isAttacked;
+
+}
+set
+    {
+        isAttacked=value;
+        if(isAttacked==true)
+        {
+            ShowWeakPoint();
+        }
+    }
+}
+public  int weakPointCount = 0;
+public GameObject[] weakPoint;
+
+
+public void ShowWeakPoint()
+{
+    isAttacked=false;
+    Invoke("Show",1.5f);
+
+}
+
+public void Show()
+{
+    weakPoint[weakPointCount].SetActive(true);
+    weakPointCount++;
+    if(weakPointCount==4)
+    {
+        patternOn=true;
+        weakPointCount=0;
+    }
 }
 
 
