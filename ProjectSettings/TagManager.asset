@@ -12,6 +12,7 @@ TagManager:
   - Energy
   - Tank
   - WeakPoint
+  - BossMusic
   layers:
   - Default
   - TransparentFX

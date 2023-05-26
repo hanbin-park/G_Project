@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
 
     public GameObject introTimeLine;
     public AudioSource bgm;
+    public AudioSource BossBGM;
     public AudioSource getGun;
 
 
@@ -250,6 +251,12 @@ public class Player : MonoBehaviour
             }
             HitUI.SetActive(true);
 
+        }
+
+        if(other.tag == "BossMusic")
+        {
+            bgm.Stop();
+            BossBGM.Play();
         }
 
     }
