@@ -108,8 +108,12 @@ public class Player : MonoBehaviour
                 }
                 if (nearOjbect.name == "Cannon")
                 {
+                    var StageWeapon=nearOjbect.GetComponent<StageWeapon>();
+                    if(StageWeapon!=null)
+                    {
+                        Debug.Log("StageWEapon");
                     GameManager.Instance.NextStage();
-
+                    }
                     Debug.Log("hit!!!!");
                     Item item = nearOjbect.GetComponent<Item>();//아이템 정보가져와서 인덱스에 기록
                     int weaponIndex = item.value;
@@ -131,7 +135,7 @@ public class Player : MonoBehaviour
                     equipWeapon = weapons[weaponIndex];
                     equipWeapon.SetActive(true);
 
-
+                    
                     introTimeLine.SetActive(false);
 
 
@@ -149,14 +153,7 @@ public class Player : MonoBehaviour
                     Destroy(nearOjbect);//집은 무기는 삭제
                     nearOjbect = null;
 
-                    if (bgm.isPlaying)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        bgm.Play();
-                    }
+                    
                 }
                 else
                 {
